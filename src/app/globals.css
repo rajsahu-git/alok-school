@@ -1,21 +1,73 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f7f7f7;
+  --foreground: #111111;
+  --border: #00000014;
+  --input: #ffffff;
+  --primary: #6e0b14;
+  --primary-foreground: #ffffff;
+  --secondary: #f8f4ec;
+  --muted-foreground: #8a8a8a;
+  --accent: #cfaf46;
+  --accent-foreground: #2b1e00;
+  --card: #ffffff;
+  /* --secondary:#fdf8f2 */
 }
 
-@theme inline {
+@theme {
+  --spacing-container-xl: 5rem;
+  --spacing-container-2xl: 7rem;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-card: var(--card);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer components {
+  .container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .container {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .container {
+      padding-left: 3rem;
+      padding-right: 3rem;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .container {
+      padding-left: 5rem;
+      padding-right: 5rem;
+    }
+  }
+
+  @media (min-width: 1536px) {
+    .container {
+      padding-left: 7rem;
+      padding-right: 7rem;
+    }
   }
 }
 
