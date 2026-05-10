@@ -1,88 +1,74 @@
-import React from "react";
+"use client";
+
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { apiClient } from "@/lib/apiClient";
+// import { FolderOpen } from "lucide-react";
 
-const images = [
-  {
-    src: "https://res.cloudinary.com/dw63rrqkr/image/upload/v1776053861/IMG-20260122-WA0020_kl1rqe.jpg",
-    alt: "Cultural Dance Performance",
-    tall: true,
-  },
-  {
-    src: "https://res.cloudinary.com/dw63rrqkr/image/upload/v1776053860/IMG-20260122-WA0021_ud2n5r.jpg",
-    alt: "Students Playing Sports",
-    tall: false,
-  },
-  {
-    src: "https://res.cloudinary.com/dw63rrqkr/image/upload/v1776053861/1000227993_981863f509043ff2e07b9dc4970ad896-7_3_2026_10_18_06_pm_tbpnqc.jpg",
-    alt: "Academic Excellence Award",
-    tall: false,
-  },
-  {
-    src: "https://res.cloudinary.com/dw63rrqkr/image/upload/v1776053860/unnamed_1_zsknt1.webp",
-    alt: "Library & Study Area",
-    tall: true,
-  },
-  {
-    src: "https://res.cloudinary.com/dw63rrqkr/image/upload/v1776053860/1000228002_702927b04699c8c9175768120d5645f5-27_2_2026_6_45_48_pm_skmcqn.jpg",
-    alt: "Science Laboratory",
-    tall: false,
-  },
-  {
-    src: "https://res.cloudinary.com/dw63rrqkr/image/upload/v1776053862/1000271794_75b19fed4ec27a229461118b059b7e56-7_3_2026_10_55_52_pm_errw5c.png",
-    alt: "Art & Creativity",
-    tall: false,
-  },
-];
+interface Folder {
+  _id: string;
+  name: string;
+  coverImage?: string;
+  driveId?: string;
+}
+
+interface FoldersResponse {
+  folders: Folder[];
+}
 
 const AlokGalllery = () => {
+  const [folders, setFolders] = useState<Folder[]>([]);
+
+  useEffect(() => {
+    apiClient
+      .get<FoldersResponse>("/gallery/folder-gallery")
+      .then((data) => setFolders(data.folders ?? []))
+      .catch(() => setFolders([]));
+  }, []);
+
+  if (!folders.length) return null;
+
+  const preview = folders.slice(0, 6);
+
   return (
     <section className="bg-background py-16">
       <div className="container">
-        {/* Header */}
         <div className="text-center mb-10">
-          <h2 className="text-3xl md:text-4xl font-bold text-primary mb-3">
-            Our Gallery
-          </h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-primary mb-3">Our Gallery</h2>
           <p className="text-muted-foreground text-sm md:text-base max-w-md mx-auto leading-relaxed">
             Glimpses of vibrant campus life, cultural celebrations, and academic excellence.
           </p>
         </div>
 
-        {/* Grid — 3 columns, rows use row-span for masonry feel */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 auto-rows-[220px]">
-
-          {/* Col 1 — tall top, short bottom */}
-          <div className="row-span-2 rounded-2xl overflow-hidden relative group">
-            <Image src={images[0].src} alt={images[0].alt} fill className="object-cover group-hover:scale-105 transition-transform duration-500" sizes="(max-width:1024px) 50vw, 33vw" />
-          </div>
-          <div className="row-span-1 rounded-2xl overflow-hidden relative group">
-            <Image src={images[4].src} alt={images[4].alt} fill className="object-cover group-hover:scale-105 transition-transform duration-500" sizes="(max-width:1024px) 50vw, 33vw" />
-          </div>
-
-          {/* Col 3 top — tall */}
-          <div className="row-span-2 rounded-2xl overflow-hidden relative group">
-            <Image src={images[3].src} alt={images[3].alt} fill className="object-cover group-hover:scale-105 transition-transform duration-500" sizes="(max-width:1024px) 50vw, 33vw" />
-          </div>
-
-          {/* Col 2 bottom */}
-          <div className="row-span-1 rounded-2xl overflow-hidden relative group">
-            <Image src={images[1].src} alt={images[1].alt} fill className="object-cover group-hover:scale-105 transition-transform duration-500" sizes="(max-width:1024px) 50vw, 33vw" />
-          </div>
-
-          {/* Col 1 bottom */}
-          <div className="row-span-1 rounded-2xl overflow-hidden relative group">
-            <Image src={images[2].src} alt={images[2].alt} fill className="object-cover group-hover:scale-105 transition-transform duration-500" sizes="(max-width:1024px) 50vw, 33vw" />
-          </div>
-
-          {/* Col 3 bottom */}
-          <div className="row-span-1 rounded-2xl overflow-hidden relative group">
-            <Image src={images[5].src} alt={images[5].alt} fill className="object-cover group-hover:scale-105 transition-transform duration-500" sizes="(max-width:1024px) 50vw, 33vw" />
-          </div>
-
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {preview.map((folder) => (
+            <Link
+              key={folder._id}
+              href={`/gallery/${folder._id}`}
+              className="group rounded-2xl overflow-hidden border border-border bg-card shadow-sm hover:shadow-md transition-shadow duration-300"
+            >
+              <div className="relative aspect-[4/3] overflow-hidden bg-muted">
+                {folder.coverImage ? (
+                  <img
+                    src={`/api/drive-image?id=${folder.coverImage.match(/[?&]id=([^&]+)/)?.[1]}`}
+                    alt={folder.name}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                ) : (
+                  <div className="flex items-center justify-center h-full">
+                    {/* <FolderOpen className="w-10 h-10 text-muted-foreground opacity-40" /> */}
+                  </div>
+                )}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                <span className="absolute bottom-3 left-4 text-white font-semibold capitalize text-sm drop-shadow">
+                  {folder.name}
+                </span>
+              </div>
+            </Link>
+          ))}
         </div>
 
-        {/* CTA */}
         <div className="flex justify-center mt-10">
           <Link
             href="/gallery"

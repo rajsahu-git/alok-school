@@ -96,6 +96,7 @@ const navItems = [
   },
   { name: "Result", href: "/result" },
   { name: "Contact", href: "/contact" },
+  { name: "Blog", href: "/blog" },
 ];
 
 function Navbar() {
