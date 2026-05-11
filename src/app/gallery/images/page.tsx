@@ -23,7 +23,7 @@ async function getFolders(): Promise<Folder[]> {
 
 export default async function GalleryPage() {
   const folders = await getFolders();
-
+  console.log(folders)
   return (
     <div>
       <ImageGallery folders={folders} />
