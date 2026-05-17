@@ -50,10 +50,11 @@ const navItems = [
         href: "/academic/team",
         children: [
           { name: "Our Teacher", href: "/academic/team/teachers" },
-          { name: "Office Staff", href: "/academic/team/staff" },
+          { name: "Office Staff", href: "/academic/team/staff" }, 
+          { name: "Coordinators", href: "/academic/team/coordinator" }, 
         ],
       },
-      { name: "Coordinators", href: "/academic/coordinators" },
+      // { name: "Coordinators", href: "/academic/coordinators" },
       { name: "Mobile App", href: "/academic/mobile-app" },
       { name: "Video Tutorial", href: "/academic/video-tutorial" },
       { name: "Skill Subject", href: "/academic/skill-subject" },
@@ -89,14 +90,14 @@ const navItems = [
     children: [
       { name: "Transfer Certificate", href: "/online/tc" },
       { name: "Career", href: "/online/career" },
-      { name: "Admission", href: "/online/admission" },
+      { name: "Admission", href: "/admission" },
       { name: "Alumni Registration", href: "/online/alumni" },
       { name: "School Uniform", href: "/online/uniform" },
     ],
   },
-  { name: "Result", href: "/result" },
-  { name: "Contact", href: "/contact" },
-  { name: "Blog", href: "/blog" },
+  // { name: "Result", href: "/result" },
+  // { name: "Contact", href: "/contact" },
+  // { name: "Blog", href: "/blog" },
 ];
 
 function Navbar() {
@@ -258,9 +259,14 @@ function Navbar() {
               </div>
             )})}
           </div>
-
-
-
+          {/* Admission Button */}
+          <Link href="/admission"
+            className="hidden lg:flex items-center gap-1.5 px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-bold hover:opacity-90 transition-opacity flex-shrink-0 ml-2">
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+            Admission Open
+          </Link>
           <button onClick={() => setMobileOpen(!mobileOpen)} className="lg:hidden p-2 text-foreground" aria-label="Toggle menu">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               {mobileOpen ? (
@@ -277,6 +283,13 @@ function Navbar() {
         <div className="lg:hidden border-t border-border bg-background max-h-[80vh] overflow-y-auto">
           <div className="container py-4 flex flex-col gap-1">
             {renderMobileMenu(navItems)}
+            <Link href="/admission" onClick={() => setMobileOpen(false)}
+              className="flex items-center gap-2 px-4 py-2.5 mt-2 rounded-lg bg-primary text-primary-foreground text-sm font-bold">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+              Admission Enquiry
+            </Link>
           </div>
         </div>
       )}

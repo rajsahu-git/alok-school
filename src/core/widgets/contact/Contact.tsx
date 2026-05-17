@@ -70,25 +70,9 @@ const Contact = () => {
         {/* Two columns */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-12">
 
-          {/* Left: contact info */}
-          <div>
-            <h3 className="text-primary font-semibold text-lg mb-6">Contact us</h3>
-            <ul className="space-y-6">
-              {contactItems.map((item) => (
-                <li key={item.label} className="flex items-start gap-3">
-                  <span className="text-primary mt-0.5 flex-shrink-0">{item.icon}</span>
-                  <div>
-                    <p className="text-sm font-semibold text-foreground mb-0.5">{item.label}</p>
-                    <p className="text-muted-foreground text-sm whitespace-pre-line">{item.value}</p>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
-
           {/* Right: form */}
           <div>
-            <h3 className="text-foreground font-semibold text-lg mb-6">Talk to a Human</h3>
+            <h3 className="text-foreground font-semibold text-lg mb-6">Contact Form</h3>
 
             {sent ? (
               <div className="flex flex-col items-center justify-center py-16 gap-3 text-center">
@@ -141,6 +125,24 @@ const Contact = () => {
             )}
           </div>
 
+          {/* Left: contact info */}
+          <div>
+            <h3 className="text-primary font-semibold text-lg mb-6">Contact us</h3>
+            <ul className="space-y-6">
+              {contactItems.map((item) => (
+                <li key={item.label} className="flex items-start gap-3">
+                  <span className="text-primary mt-0.5 flex-shrink-0">{item.icon}</span>
+                  <div>
+                    <p className="text-sm font-semibold text-foreground mb-0.5">{item.label}</p>
+                    <p className="text-muted-foreground text-sm whitespace-pre-line">{item.value}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+
+
         </div>
 
         {/* Google Map embed */}
@@ -149,7 +151,7 @@ const Contact = () => {
             title="Alok Institution Location"
             src={mapUrl}
             width="100%"
-            height="420"
+            height="380"
             style={{ border: 0 }}
             allowFullScreen
             loading="lazy"

@@ -14,30 +14,44 @@ async function handler(req: NextRequest, { params }: { params: Promise<{ path: s
   const tokenFromHeader = req.headers.get("authorization")?.replace("Bearer ", "");
   const token = tokenFromCookie ?? tokenFromHeader ?? null;
 
-  const isFormData = req.headers.get("content-type")?.includes("multipart/form-data");
+  const contentType = req.headers.get("content-type") ?? "";
+  const isFormData = contentType.includes("multipart/form-data");
   const isGet = req.method === "GET" || req.method === "HEAD";
 
-  // Never manually set Content-Type for FormData — browser sets it with boundary
-  const forwardHeaders: Record<string, string> = {
-    ...(token ? { Authorization: `Bearer ${token}` } : {}),
-    ...(!isFormData && !isGet ? { "Content-Type": req.headers.get("content-type") ?? "application/json" } : {}),
-  };
+  // Build forward headers
+  const forwardHeaders: Record<string, string> = {};
+  if (token) forwardHeaders["Authorization"] = `Bearer ${token}`;
 
-  const body = isGet
-    ? undefined
-    : isFormData
-    ? await req.blob()
-    : await req.text();
+  // For FormData: MUST forward the original Content-Type with boundary intact
+  // For JSON: set Content-Type manually
+  // For GET: no Content-Type needed
+  if (isFormData) {
+    forwardHeaders["Content-Type"] = contentType; // includes boundary
+  } else if (!isGet) {
+    forwardHeaders["Content-Type"] = contentType || "application/json";
+  }
+
+  let body: BodyInit | undefined = undefined;
+  if (!isGet) {
+    if (isFormData) {
+      // Stream the body directly to preserve multipart boundaries
+      body = req.body as BodyInit;
+    } else {
+      body = await req.arrayBuffer();
+    }
+  }
 
   try {
     const upstream = await fetch(url, {
       method: req.method,
       headers: forwardHeaders,
-      body: body as BodyInit | undefined,
+      body,
+      // @ts-expect-error — disable duplex warning in Node fetch
+      duplex: "half",
     });
 
-    const contentType = upstream.headers.get("content-type") ?? "";
-    const data = contentType.includes("application/json")
+    const upstreamContentType = upstream.headers.get("content-type") ?? "";
+    const data = upstreamContentType.includes("application/json")
       ? await upstream.json()
       : await upstream.text();
 
