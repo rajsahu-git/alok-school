@@ -109,25 +109,57 @@ function WhyAlok() {
 
           <div className="space-y-4 text-sm md:text-base text-muted-foreground leading-relaxed text-justify">
             <p>
-              Whose Guiding Line is <strong className="text-foreground">स्वयं सिद्धि</strong> means
-              &apos;self-realization&apos; is the path to move on and look ahead for a brighter tomorrow.
-              ALOK is known as an <strong className="text-foreground">Educational Institution Of Personality Development</strong> — an
-              innovative effort to integrate the best ideas in education taken from all good practices of Indian values, ethics, culture, customs and traditions whereby learning takes place by doing, where knowledge and activities are not separated from each other, and the virtuous character of the child is built to last a lifetime.
+              Whose Guiding Line is{" "}
+              <strong className="text-foreground">स्वयं सिद्धि</strong> means
+              &apos;self-realization&apos; is the path to move on and look ahead
+              for a brighter tomorrow. ALOK is known as an{" "}
+              <strong className="text-foreground">
+                Educational Institution Of Personality Development
+              </strong>{" "}
+              — an innovative effort to integrate the best ideas in education
+              taken from all good practices of Indian values, ethics, culture,
+              customs and traditions whereby learning takes place by doing,
+              where knowledge and activities are not separated from each other,
+              and the virtuous character of the child is built to last a
+              lifetime.
             </p>
             <p>
-              Creativity in thought, thought in action, action with purpose and purpose in life. With this vision ALOK has been cultivating a wide spectrum of practices to nurture the future generation. Every student of our school is nurtured and empowered to blossom in their own special way.
+              Creativity in thought, thought in action, action with purpose and
+              purpose in life. With this vision ALOK has been cultivating a wide
+              spectrum of practices to nurture the future generation. Every
+              student of our school is nurtured and empowered to blossom in
+              their own special way.
             </p>
             <p>
-              Alok strongly believes that all students have the potential to be successful learners and there is no limit to what a child can achieve. Each child has a different learning style. Our curriculum keeps evolving to incorporate the latest learning techniques through highly qualified and dedicated teaching staff with a wide range of skills and interests which gives shape to this and provides a very enriching environment.
+              Alok strongly believes that all students have the potential to be
+              successful learners and there is no limit to what a child can
+              achieve. Each child has a different learning style. Our curriculum
+              keeps evolving to incorporate the latest learning techniques
+              through highly qualified and dedicated teaching staff with a wide
+              range of skills and interests which gives shape to this and
+              provides a very enriching environment.
             </p>
             <p>
-              Alok also strives to make the principle of universal peace and tolerance the basis of ALOK, so that every child who comes to us leaves the school with a habit of humbly making our future world a place of harmony and goodwill towards all. Emphasis is laid on learning from the environment combining spiritual philosophies with different subjects in the curriculum.
+              Alok also strives to make the principle of universal peace and
+              tolerance the basis of ALOK, so that every child who comes to us
+              leaves the school with a habit of humbly making our future world a
+              place of harmony and goodwill towards all. Emphasis is laid on
+              learning from the environment combining spiritual philosophies
+              with different subjects in the curriculum.
             </p>
             <p>
-              Alok believes that the classroom experiences of children are to be organized in a manner that permits them to construct knowledge in connection with the child&apos;s natural environment, thus providing equal learning opportunities for all children.
+              Alok believes that the classroom experiences of children are to be
+              organized in a manner that permits them to construct knowledge in
+              connection with the child&apos;s natural environment, thus
+              providing equal learning opportunities for all children.
             </p>
             <p>
-              ALOK aims at enhancing the child&apos;s innate desire and acumen to learn. Activity is at the heart of children&apos;s attempt to make sense of the world around them. Therefore, every resource is deployed in a child-centric manner to enable them to express themselves, handle objects, explore their natural and social milieu, and to grow up in good health.
+              ALOK aims at enhancing the child&apos;s innate desire and acumen
+              to learn. Activity is at the heart of children&apos;s attempt to
+              make sense of the world around them. Therefore, every resource is
+              deployed in a child-centric manner to enable them to express
+              themselves, handle objects, explore their natural and social
+              milieu, and to grow up in good health.
             </p>
           </div>
         </div>
@@ -137,10 +169,13 @@ function WhyAlok() {
       <section className="py-14 bg-background">
         <div className="container">
           <div className="text-center mb-10">
-            <h2 className="text-2xl md:text-3xl font-bold text-primary">Attributes of Alok</h2>
+            <h2 className="text-2xl md:text-3xl font-bold text-primary">
+              Attributes of Alok
+            </h2>
             <p className="text-muted-foreground text-sm mt-2 max-w-2xl mx-auto">
-              The Seven Attributes of Alok which are reflected in its daily activities for the students distinguish
-              Alok from other educational institutions.
+              The Seven Attributes of Alok which are reflected in its daily
+              activities for the students distinguish Alok from other
+              educational institutions.
             </p>
             <div className="flex items-center justify-center gap-3 mt-3">
               <span className="block w-12 h-px bg-accent" />
@@ -149,7 +184,7 @@ function WhyAlok() {
             </div>
           </div>
 
-          <div className="space-y-5 bg-background grid grid-cols-3 gap-3">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {attributes.map((attr) => (
               <div
                 key={attr.id}
@@ -178,7 +213,6 @@ function WhyAlok() {
       <section className="py-14 bg-background">
         <div className="container">
           <div className="grid lg:grid-cols-2 gap-10">
-
             {/* Left: Premier institute */}
             <div className="bg-card rounded-2xl border border-border shadow-sm p-8">
               <h3 className="text-lg font-bold text-primary mb-1">
@@ -188,7 +222,10 @@ function WhyAlok() {
 
               <ul className="space-y-2 mb-8">
                 {premierPoints.map((p, i) => (
-                  <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
+                  <li
+                    key={i}
+                    className="flex items-start gap-2 text-sm text-muted-foreground"
+                  >
                     <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-accent flex-shrink-0" />
                     {p}
                   </li>
@@ -200,7 +237,10 @@ function WhyAlok() {
               </h4>
               <ul className="space-y-2">
                 {distinctiveness.map((d, i) => (
-                  <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
+                  <li
+                    key={i}
+                    className="flex items-start gap-2 text-sm text-muted-foreground"
+                  >
                     <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" />
                     {d}
                   </li>
@@ -217,7 +257,10 @@ function WhyAlok() {
 
               <ul className="space-y-3">
                 {goals.map((g, i) => (
-                  <li key={i} className="flex items-start gap-3 text-sm text-muted-foreground leading-relaxed">
+                  <li
+                    key={i}
+                    className="flex items-start gap-3 text-sm text-muted-foreground leading-relaxed"
+                  >
                     <span className="flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 text-primary text-xs font-bold flex items-center justify-center mt-0.5">
                       {i + 1}
                     </span>
@@ -226,7 +269,6 @@ function WhyAlok() {
                 ))}
               </ul>
             </div>
-
           </div>
         </div>
       </section>
