@@ -185,7 +185,7 @@ export default function BannerManager() {
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
             {previews.map((p, i) => (
               <div key={i} className="relative group rounded-lg overflow-hidden border border-border aspect-video bg-secondary">
-                <img src={p.url} alt={`preview-${i}`}  className="object-cover" />
+                <img src={p.url} alt={`preview-${i}`}  className=" object-cover" />
                 <button
                   onClick={() => removePreview(i)}
                   className="absolute top-1 right-1 w-6 h-6 bg-red-500 text-white rounded-full text-xs flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"

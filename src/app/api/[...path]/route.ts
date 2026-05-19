@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
 
+export const maxDuration = 60;
+export const dynamic = 'force-dynamic';
+
 const BACKEND = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5000";
 
 async function handler(req: NextRequest, { params }: { params: Promise<{ path: string[] }> }) {

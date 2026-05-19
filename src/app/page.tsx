@@ -3,6 +3,7 @@ import AlokValue from "@/core/widgets/home/AlokValue";
 import HomeSlider from "@/core/widgets/home/HomeSlider";
 import AlokGalllery from "@/core/widgets/home/AlokGalllery";
 import ContactForm from "@/core/widgets/home/ContactForm";
+import AchievementSlider from "@/core/widgets/home/AchievementSlider";
 
 const FALLBACK_SLIDES = [
   "https://res.cloudinary.com/dw63rrqkr/image/upload/v1776053860/unnamed_1_zsknt1.webp",
@@ -37,6 +38,7 @@ export default async function Home() {
       <AlokHistory />
       <AlokKidsPlanet />
       <AlokGalllery />
+      <AchievementSlider />
       <ContactForm />
     </main>
   );
