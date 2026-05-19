@@ -34,7 +34,7 @@ const navItems = [
     name: "Admission",
     href: "/admission",
     children: [
-      { name: "Registration Form", href: "/admission/registration" },
+      { name: "Registration Form", href: "/admission" },
       { name: "Fee Structure", href: "/admission/fee-structure" },
       { name: "Rules & Regulations", href: "/admission/rules" },
     ],
@@ -55,7 +55,7 @@ const navItems = [
         ],
       },
       // { name: "Coordinators", href: "/academic/coordinators" },
-      { name: "Mobile App", href: "/academic/mobile-app" },
+      { name: "Mobile App", href: "https://play.google.com/store/apps/details?id=com.next.nlp" },
       { name: "Video Tutorial", href: "/academic/video-tutorial" },
       { name: "Skill Subject", href: "/academic/skill-subject" },
       { name: "Annual Calendar", href: "/academic/calendar" },
@@ -89,7 +89,7 @@ const navItems = [
     href: "/online",
     children: [
       { name: "Transfer Certificate", href: "/online/tc" },
-      { name: "Career", href: "/online/career" },
+      { name: "Career", href: "/career" },
       { name: "Admission", href: "/admission" },
       { name: "Alumni Registration", href: "/online/alumni" },
       { name: "School Uniform", href: "/online/uniform" },
