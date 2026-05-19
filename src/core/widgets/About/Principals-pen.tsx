@@ -34,12 +34,12 @@ Our school is oriented to the total formation of a child and to adaptations of v
           {/* Right: image */}
           <div className="w-full lg:w-[45%] flex justify-center lg:justify-end">
             <div className="rounded-2xl overflow-hidden shadow-md border border-border w-full max-w-sm">
-              <Image
-                src="https://res.cloudinary.com/dw63rrqkr/image/upload/v1776081713/chairman_mhunyo.png"
-                alt="Dr. Pradeep Kumawat - Director"
-                width={480}
-                height={380}
-                className="w-full h-64 md:h-72 object-cover object-top grayscale"
+              <img
+                src={`/PRINCIPAL-SIR.png`}
+                
+                alt="Lalit kuamr"
+   
+                className="w-full object-cover object-top "
               />
             </div>
           </div>

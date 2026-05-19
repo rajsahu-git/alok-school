@@ -28,13 +28,12 @@ const Origin = () => {
           {/* Two-col: image + intro text */}
           <div className="grid lg:grid-cols-2 gap-12 items-start mb-14">
             <div className="relative">
-              <Image
-                src="https://res.cloudinary.com/dw63rrqkr/image/upload/v1776053860/1000228002_702927b04699c8c9175768120d5645f5-27_2_2026_6_45_48_pm_skmcqn.jpg"
+              <img
+                src="/acharya ji.png"
                 alt="Alok Institution Building"
-                width={640}
-                height={440}
+               
                 className="w-full h-auto object-cover rounded-3xl shadow-lg"
-                priority
+                
               />
               {/* Floating badge */}
               <div className="absolute -bottom-5 -right-4 bg-primary text-primary-foreground rounded-2xl px-5 py-3 shadow-xl">
@@ -144,8 +143,8 @@ const Origin = () => {
                 {/* Decorative ring */}
                 <div className="absolute -inset-3 rounded-3xl border-2 border-accent/30" />
                 <div className="absolute -inset-6 rounded-3xl border border-accent/15" />
-                <Image
-                  src="https://res.cloudinary.com/dw63rrqkr/image/upload/v1776081713/chairman_mhunyo.png"
+                <img
+                   src="/acharya ji.png"
                   alt="Late. Shri Shyamlal Kumawat"
                   width={380}
                   height={460}

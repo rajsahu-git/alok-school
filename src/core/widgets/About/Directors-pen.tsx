@@ -6,9 +6,7 @@ const DirectorsPen = () => {
       <div className="container">
 
         {/* Heading */}
-        <h2 className="text-3xl md:text-4xl font-bold text-primary text-center mb-12 tracking-wide font-serif">
-          Director&apos;s Pen
-        </h2>
+
 
         {/* Main card: name + quote left, image right */}
         <div className="flex flex-col lg:flex-row gap-10 mb-10">
@@ -38,12 +36,12 @@ const DirectorsPen = () => {
           {/* Right: image */}
           <div className="w-full lg:w-[45%] flex justify-center lg:justify-end">
             <div className="rounded-2xl overflow-hidden shadow-md border border-border w-full max-w-sm">
-              <Image
-                src="https://res.cloudinary.com/dw63rrqkr/image/upload/v1776081713/chairman_mhunyo.png"
+              <img
+                src="/DIRECTOR-SIR.png"
                 alt="Dr. Pradeep Kumawat - Director"
                 width={480}
                 height={380}
-                className="w-full h-64 md:h-72 object-cover object-top grayscale"
+                className="w-full h-64 md:h-72 object-cover object-top "
               />
             </div>
           </div>

@@ -115,11 +115,13 @@ function AlockKids() {
                 <div className="absolute -inset-3 rounded-full border-4 border-accent/30" />
                 <div className="absolute -inset-6 rounded-full border-2 border-primary/10" />
                 <div className="w-full h-full rounded-full overflow-hidden shadow-2xl border-4 border-card">
-                  <Image
-                    src="https://res.cloudinary.com/dw63rrqkr/image/upload/v1776081713/chairman_mhunyo.png"
+                  <img
+                    src={`/api/drive-image?id=1cGCANb0h3wK5qa6y8ndl7kZqmbinDcOC`}
                     alt="Alok Kids Planet"
-                    fill
-                    className="object-cover"
+                    width={320}
+                    height={320}
+                    className="w-full h-full object-cover"
+                    style={{ display: "block" }}
                   />
                 </div>
                 {/* Label badge */}
