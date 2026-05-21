@@ -25,7 +25,7 @@ const ContactForm = () => {
             {/* ── Left: info ── */}
             <div className="w-full lg:w-[40%] text-primary-foreground">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">Stay Connected</h2>
-              <p className="text-white/70 text-sm md:text-base leading-relaxed mb-10">
+              <p className="text-white/85 text-base md:text-lg leading-relaxed mb-10">
                 Kindly fill the form for any query. Our dedicated team will respond promptly
                 to ensure your journey with us is completely seamless.
               </p>

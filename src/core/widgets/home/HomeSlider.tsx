@@ -45,11 +45,11 @@ const HomeSlider = ({ slides }: { slides: string[] }) => {
   };
 
   if (!slides.length) {
-    return <div className="w-full h-[500px] md:h-[550px] bg-secondary animate-pulse" />;
+    return <div className="w-full aspect-video md:aspect-auto md:h-[40rem] bg-secondary animate-pulse" />;
   }
 
   return (
-    <div className="relative h-[40rem] overflow-hidden bg-black select-none">
+    <div className="relative aspect-video md:aspect-auto md:h-[40rem] overflow-hidden bg-black select-none">
       {/* Slides — all rendered, opacity crossfade */}
       {slides.map((src, index) => (
         <div

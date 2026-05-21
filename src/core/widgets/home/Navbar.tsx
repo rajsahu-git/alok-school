@@ -231,14 +231,14 @@ function Navbar() {
   };
 
   return (
-    <nav className="border-b border-border bg-background sticky top-0 z-50">
+    <nav className="border-b  border-border bg-background sticky top-0 z-50">
       <div className="container">
         <div className="flex h-16 items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
             <img className="w-44" src="https://rajsamand.alokschool.org/wp-content/uploads/2021/06/alokh-logo.png" alt="Alok" />
           </Link>
 
-          <div className="hidden lg:flex items-stretch gap-1" onMouseLeave={handleMenuLeave}>
+          <div className="hidden  lg:flex items-stretch gap-1" onMouseLeave={handleMenuLeave}>
             {navItems.map((item) => {
               const isActive = item.href ? pathname === item.href || pathname.startsWith(item.href + "/") : false;
               return (
@@ -261,7 +261,8 @@ function Navbar() {
           </div>
           {/* Admission Button */}
           <Link href="/admission"
-            className="hidden lg:flex items-center gap-1.5 px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-bold hover:opacity-90 transition-opacity flex-shrink-0 ml-2">
+            className="hidden lg:flex items-center gap-1.5 px-4 py-2 rounded-lg bg-primary !text-white text-sm font-bold hover:opacity-90 transition-opacity flex-shrink-0 ml-2">
+              
             <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
             </svg>

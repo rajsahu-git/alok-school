@@ -64,7 +64,7 @@ function NoticePannel({ notices }: { notices: Notice[] }) {
   return (
     <div className="flex flex-col h-full">
       {/* Notice header */}
-      <div className="bg-primary text-white text-center font-bold py-3 px-4 rounded-t-xl text-sm tracking-wide">
+      <div className="bg-primary text-white text-center font-bold py-3 px-4 rounded-t-xl text-base tracking-wide">
         📢 Notice Board
       </div>
 
@@ -91,7 +91,7 @@ function NoticePannel({ notices }: { notices: Notice[] }) {
                     href={href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sm text-gray-700 hover:text-primary hover:underline leading-snug"
+                    className="text-base text-foreground/80 hover:text-primary hover:underline leading-snug"
                   >
                     {notice.title}
                   </a>
@@ -114,7 +114,7 @@ export default function AcademicAndNotice({ notices }: { notices: Notice[] }) {
           <h2 className="text-3xl md:text-4xl font-bold text-foreground">
             Academic <span className="text-primary">Programs</span>
           </h2>
-          <p className="text-muted-foreground mt-2 text-sm md:text-base">
+          <p className="text-foreground/70 mt-2 text-base md:text-lg">
             A structured learning journey for every stage of growth
           </p>
         </div>
@@ -130,9 +130,9 @@ export default function AcademicAndNotice({ notices }: { notices: Notice[] }) {
                   className="bg-white rounded-xl border border-dashed border-gray-300 overflow-hidden shadow-sm hover:shadow-md transition-shadow"
                 >
                   {/* Card header */}
-                  <div className="bg-primary text-white text-center font-bold py-2.5 px-4 text-sm">
+                  <div className="bg-primary text-white text-center font-bold py-2.5 px-4 text-base">
                     {p.label}
-                    <span className="block text-xs font-normal opacity-80">{p.grades}</span>
+                    <span className="block text-sm font-normal opacity-80">{p.grades}</span>
                   </div>
 
                   {/* Connector line */}
@@ -142,10 +142,10 @@ export default function AcademicAndNotice({ notices }: { notices: Notice[] }) {
 
                   {/* Card body */}
                   <div className="px-5 pb-5 pt-1">
-                    <p className="text-gray-600 text-sm mb-3 leading-relaxed">{p.desc}</p>
+                    <p className="text-foreground/75 text-base mb-3 leading-relaxed">{p.desc}</p>
                     <ul className="space-y-1.5">
                       {p.points.map((pt) => (
-                        <li key={pt} className="flex items-start gap-2 text-sm text-gray-700">
+                        <li key={pt} className="flex items-start gap-2 text-base text-foreground/80">
                           <span className="text-primary font-bold mt-0.5">✓</span>
                           {pt}
                         </li>

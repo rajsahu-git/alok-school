@@ -48,7 +48,7 @@ const AlokHistory = () => {
             </blockquote>
 
             {/* Body text */}
-            <div className="space-y-4 text-muted-foreground text-sm md:text-base leading-relaxed mb-8">
+            <div className="space-y-4 text-foreground/75 text-base md:text-lg leading-relaxed mb-8">
               <p>
                 The founder-chairman Shri Shyamlal Kumawat laid the foundation of Alok
                 Institution on 29th June 1967 at Panchwati to make a purposeful contribution
@@ -101,7 +101,7 @@ const AlokKidsPlanet = () => {
             <h2 className="text-2xl md:text-3xl font-bold text-primary leading-snug mb-5">
               Together we can &ldquo;sow the seeds of success&rdquo;!
             </h2>
-            <p className="text-muted-foreground text-sm md:text-base leading-relaxed mb-8 text-justify">
+            <p className="text-foreground/75 text-base md:text-lg leading-relaxed mb-8 text-justify">
               Every Child is Unique. One&rsquo;s goals and aspirations are different from
               another&rsquo;s. That&rsquo;s why we believe that it is important to reach out
               and give personalized attention to each child to make each one feel that she or

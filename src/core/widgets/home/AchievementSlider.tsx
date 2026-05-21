@@ -37,7 +37,7 @@ export default function AchievementSlider() {
             <span className="w-2 h-2 rounded-full bg-accent inline-block" />
             <span className="block w-12 h-px bg-accent" />
           </div>
-          <p className="text-muted-foreground text-sm mt-3 max-w-md mx-auto">
+          <p className="text-foreground/70 text-base mt-3 max-w-md mx-auto">
             Celebrating the milestones and accomplishments of our students.
           </p>
         </div>

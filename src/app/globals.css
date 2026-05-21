@@ -1,18 +1,17 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f7f7f7;
-  --foreground: #111111;
-  --border: #00000014;
+  --background: #ffffff;
+  --foreground: #1a1a2e;
+  --border: #e5e7eb;
   --input: #ffffff;
   --primary: #6e0b14;
   --primary-foreground: #ffffff;
-  --secondary: #f8f4ec;
-  --muted-foreground: #8a8a8a;
+  --secondary: #f9f5f0;
+  --muted-foreground: #4b5563;
   --accent: #cfaf46;
   --accent-foreground: #2b1e00;
   --card: #ffffff;
-  /* --secondary:#fdf8f2 */
 }
 
 @theme {
@@ -29,8 +28,8 @@
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
   --color-card: var(--card);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-playfair);
 }
 
 @layer components {
@@ -74,7 +73,21 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter), "Inter", system-ui, -apple-system, sans-serif;
+  font-size: 15px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-playfair), var(--font-inter), serif;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+a {
+  text-decoration: none;
 }
 
 @keyframes marquee {

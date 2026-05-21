@@ -6,11 +6,11 @@ import Image from "next/image";
 const faqs = [
   {
     q: "What makes Alok Sansthan a good choice for English-medium education?",
-    a: "Alok Sansthan offers a rich English-medium curriculum with experienced faculty, modern infrastructure, and a nurturing environment that ensures holistic development of every student.",
+    a: "Alok Sansthan offers English-medium education with a focus on reading, writing and communication skills. Following both CBSE and RBSE curricula, it provides a balanced academic foundation with supportive teachers and practical teaching methods, making it a trusted choice.",
   },
   {
-    q: "Why is Alok Sansthan considered a top performing school in Udaipur?",
-    a: "Our consistent academic results, co-curricular achievements, and disciplined learning environment have earned us recognition as one of the leading schools in Udaipur.",
+    q: "Why is Alok Sansthan considered a top performing school in Rajsamand?",
+    a: "The school consistently delivers excellent academic results, reflecting its commitment to quality education, structured learning, and strong academic guidance.",
   },
   {
     q: "Which syllabus does the school follow (CBSE / RBSE)?",
@@ -22,7 +22,7 @@ const faqs = [
   },
   {
     q: "What facilities are available to support overall student development?",
-    a: "We offer well-equipped science & computer labs, a library, sports ground, auditorium, art room, and transport facilities to support every aspect of student growth.",
+    a: "The school provides modern classrooms, well-equipped labs, a library, playgrounds, and dedicated spaces for arts and activities, creating a balanced environment for academic and overall growth.",
   },
   {
     q: "How can I apply for admission at Alok Sansthan?",
@@ -37,7 +37,7 @@ export default function FaqSection() {
     <section className="py-14 bg-white">
       <div className="container">
         {/* Heading */}
-        <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-8">
+        <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-8">
           Frequently Asked <span className="text-primary">Questions</span>
         </h2>
 
@@ -56,7 +56,7 @@ export default function FaqSection() {
                     className="w-full flex items-center gap-4 px-5 py-4 text-left hover:bg-gray-50 transition-colors"
                   >
                     <span className="text-primary font-bold text-base w-6 shrink-0">{i + 1}</span>
-                    <span className="flex-1 text-sm md:text-base font-medium text-foreground leading-snug">
+                    <span className="flex-1 text-base md:text-lg font-medium text-foreground leading-snug">
                       {faq.q}
                     </span>
                     <span className="text-primary font-bold text-xl shrink-0 leading-none">
@@ -66,7 +66,7 @@ export default function FaqSection() {
 
                   {isOpen && (
                     <div className="px-5 pb-4 pt-0 border-t border-gray-100">
-                      <p className="text-sm text-muted-foreground leading-relaxed pl-10">
+                      <p className="text-base text-foreground/75 leading-relaxed pl-10">
                         {faq.a}
                       </p>
                     </div>
@@ -76,17 +76,7 @@ export default function FaqSection() {
             })}
           </div>
 
-          {/* RIGHT — Image */}
-          <div className="w-full lg:w-80 xl:w-96 shrink-0">
-            <div className="relative w-full aspect-[3/4] rounded-2xl overflow-hidden bg-primary/10">
-              <img
-                src="/PRINCIPAL-SIR.png"
-                alt="FAQ illustration"
-              
-                className="object-cover object-top"
-              />
-            </div>
-          </div>
+
         </div>
       </div>
     </section>

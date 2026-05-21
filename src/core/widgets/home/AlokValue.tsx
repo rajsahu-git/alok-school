@@ -91,7 +91,7 @@ const AlokValue = () => {
           <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">
             Welcome to Alok Institution
           </h2>
-          <p className="text-muted-foreground max-w-lg mx-auto text-sm md:text-base leading-relaxed">
+          <p className="text-foreground/70 max-w-lg mx-auto text-base md:text-lg leading-relaxed">
             Rooted in rich Indian heritage, we cultivate future leaders through a holistic
             approach to education, integrating timeless values with modern learning.
           </p>
@@ -109,10 +109,10 @@ const AlokValue = () => {
               {item.icon}
             </div>
 
-            <h3 className="text-sm font-bold tracking-[0.15em] text-primary mb-3">
+            <h3 className="text-base font-bold tracking-[0.15em] text-primary mb-3">
               {item.title}
             </h3>
-            <p className="text-muted-foreground text-sm leading-relaxed">{item.description}</p>
+            <p className="text-foreground/75 text-base leading-relaxed">{item.description}</p>
           </div>
         ))}
         </div>

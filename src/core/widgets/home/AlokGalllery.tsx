@@ -36,7 +36,7 @@ const AlokGalllery = () => {
       <div className="container">
         <div className="text-center mb-10">
           <h2 className="text-3xl md:text-4xl font-bold text-primary mb-3">Our Gallery</h2>
-          <p className="text-muted-foreground text-sm md:text-base max-w-md mx-auto leading-relaxed">
+          <p className="text-foreground/70 text-base md:text-lg max-w-md mx-auto leading-relaxed">
             Glimpses of vibrant campus life, cultural celebrations, and academic excellence.
           </p>
         </div>
