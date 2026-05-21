@@ -4,6 +4,8 @@ import HomeSlider from "@/core/widgets/home/HomeSlider";
 import AlokGalllery from "@/core/widgets/home/AlokGalllery";
 import ContactForm from "@/core/widgets/home/ContactForm";
 import AchievementSlider from "@/core/widgets/home/AchievementSlider";
+import AcademicAndNotice from "@/core/widgets/home/AcademicAndNotice";
+import FaqSection from "@/core/widgets/home/FaqSection";
 
 const FALLBACK_SLIDES = [
   "https://res.cloudinary.com/dw63rrqkr/image/upload/v1776053860/unnamed_1_zsknt1.webp",
@@ -28,17 +30,31 @@ async function getBannerSlides(): Promise<string[]> {
   }
 }
 
+async function getNotices() {
+  const base = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5000";
+  try {
+    const res = await fetch(`${base}/api/notice`, { cache: "no-store" });
+    if (!res.ok) return [];
+    const data = await res.json();
+    return data.notices ?? [];
+  } catch {
+    return [];
+  }
+}
+
 export default async function Home() {
-  const slides = await getBannerSlides();
+  const [slides, notices] = await Promise.all([getBannerSlides(), getNotices()]);
 
   return (
     <main>
       <HomeSlider slides={slides} />
       <AlokValue />
+      <AcademicAndNotice notices={notices} />
       <AlokHistory />
       <AlokKidsPlanet />
       <AlokGalllery />
       <AchievementSlider />
+      <FaqSection />
       <ContactForm />
     </main>
   );

@@ -179,7 +179,7 @@ function Navbar() {
         {item.children ? (
           <div className="flex flex-col">
 <button
-              className={`flex items-center justify-between w-full px-4 py-2 text-left text-sm hover:bg-secondary border-l-[3px] ${isActive ? "text-primary font-medium border-primary" : "text-foreground border-transparent"}`}
+              className={`flex items-center justify-between w-full px-4 py-2 text-left text-sm hover:bg-secondary border-l-[3px] ${isActive ? "text-primary font-medium border-primary" : "text-black border-transparent"}`}
               onClick={() => setOpenSubMenu(openSubMenu === item.name ? null : item.name)}
             >
               <span>{item.name}</span>

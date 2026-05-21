@@ -2,6 +2,7 @@ import TCDownload from '@/core/widgets/online/TCDownload';
 import PageHero from '@/core/widgets/shared/PageHero';
 
 export default function TCPage() {
+  console.log("Hello,,....")
   return (
     <>
       <PageHero
