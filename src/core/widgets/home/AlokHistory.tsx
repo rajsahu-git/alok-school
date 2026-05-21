@@ -11,13 +11,12 @@ const AlokHistory = () => {
           {/* Image */}
           <div className="w-full lg:w-[45%] flex-shrink-0">
             <div className="relative rounded-2xl overflow-hidden border-2 border-accent/40 shadow-lg">
-              <Image
-                src="https://res.cloudinary.com/dw63rrqkr/image/upload/v1776081713/chairman_mhunyo.png"
+              <img
+                src="/Shyamlal.jpeg"
                 alt="Shri Shyamlal Kumawat - Founder Chairman"
-                width={560}
-                height={640}
+                
                 className="w-full h-auto object-cover"
-                priority
+                
               />
               {/* Gold corner accent */}
               <span className="absolute top-3 left-3 w-10 h-10 border-t-2 border-l-2 border-accent rounded-tl-lg" />

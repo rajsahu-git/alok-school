@@ -69,7 +69,7 @@ const HomeSlider = ({ slides }: { slides: string[] }) => {
       {/* Prev Arrow */}
       <button
         onClick={handlePrev}
-        className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 bg-white/20 hover:bg-white/40 backdrop-blur-sm rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 active:scale-95"
+        className="hidden absolute left-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 bg-white/20 hover:bg-white/40 backdrop-blur-sm rounded-full lg:flex items-center justify-center transition-all duration-200 hover:scale-110 active:scale-95"
         aria-label="Previous slide"
       >
         <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -80,7 +80,7 @@ const HomeSlider = ({ slides }: { slides: string[] }) => {
       {/* Next Arrow */}
       <button
         onClick={handleNext}
-        className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 bg-white/20 hover:bg-white/40 backdrop-blur-sm rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 active:scale-95"
+        className="hidden absolute right-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 bg-white/20 hover:bg-white/40 backdrop-blur-sm rounded-full lg:flex items-center justify-center transition-all duration-200 hover:scale-110 active:scale-95"
         aria-label="Next slide"
       >
         <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -89,7 +89,7 @@ const HomeSlider = ({ slides }: { slides: string[] }) => {
       </button>
 
       {/* Dots */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex gap-2 items-center">
+      <div className="hidden absolute bottom-6 left-1/2 -translate-x-1/2 z-20 lg:flex gap-2 items-center">
         {slides.map((_, index) => (
           <button
             key={index}
@@ -103,7 +103,7 @@ const HomeSlider = ({ slides }: { slides: string[] }) => {
       </div>
 
       {/* Counter */}
-      <div className="absolute bottom-6 right-6 z-20 bg-black/30 backdrop-blur-sm px-4 py-2 rounded-full">
+      <div className="hidden absolute bottom-6 right-6 z-20 bg-black/30 backdrop-blur-sm px-4 py-2 rounded-full">
         <span className="text-white text-sm font-medium">
           {current + 1} / {slides.length}
         </span>
