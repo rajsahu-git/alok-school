@@ -44,7 +44,7 @@ export default function TopBar() {
         {/* ── Social Icons ── */}
         <div className="flex-shrink-0 flex items-center gap-0 border-l border-primary-foreground/20">
           <a
-            href="https://facebook.com"
+            href="https://www.facebook.com/alokrajsamand"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Facebook"
@@ -55,7 +55,7 @@ export default function TopBar() {
             </svg>
           </a>
           <a
-            href="https://instagram.com"
+            href="https://www.instagram.com/alokschoolrajsamand"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Instagram"

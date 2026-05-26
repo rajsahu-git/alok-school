@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { Children, useState } from "react";
 import { usePathname } from "next/navigation";
 
 const navItems = [
@@ -95,9 +95,13 @@ const navItems = [
       { name: "School Uniform", href: "/online/uniform" },
     ],
   },
-  // { name: "Result", href: "/result" },
+  { name: "Result", href: "/result", children:[
+    {name:"Class 10th", href: "/result/classX" },
+    {name: "Class 12th", href: "/result/classXII"}
+  ] 
+},
   // { name: "Contact", href: "/contact" },
-  // { name: "Blog", href: "/blog" },
+  { name: "Blog", href: "/blog" },
 ];
 
 function Navbar() {
@@ -244,7 +248,7 @@ function Navbar() {
               return (
               <div key={item.name} className="relative flex" onMouseEnter={() => item.children && setOpenMenu(item.name)}>
                 {item.children ? (
-                  <div className={`flex items-center px-3 py-2 cursor-pointer text-sm font-medium transition-colors border-b-[3px] ${isActive ? "text-primary border-primary" : "text-muted-foreground hover:text-foreground border-transparent"}`}>
+                  <div className={`flex items-center px-1.5 py-2 cursor-pointer text-sm font-medium transition-colors border-b-[3px] ${isActive ? "text-primary border-primary" : "text-muted-foreground hover:text-foreground border-transparent"}`}>
                     {item.name}
                     <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
