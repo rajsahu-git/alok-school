@@ -158,7 +158,7 @@ export default function AcademicAndNotice({ notices }: { notices: Notice[] }) {
           </div>
 
           {/* RIGHT — Notice Board */}
-          <div className="hidden lg:flex w-full lg:w-80 xl:w-96 shrink-0">
+          <div className="hidden lg:grid w-full lg:w-80 xl:w-96 shrink-0">
             <NoticePannel notices={notices} />
           </div>
         </div>
