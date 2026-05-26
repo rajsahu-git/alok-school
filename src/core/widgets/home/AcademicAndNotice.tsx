@@ -37,7 +37,7 @@ const programs = [
   },
 ];
 
-function NoticePannel({ notices }: { notices: Notice[] }) {
+export function NoticePannel({ notices }: { notices: Notice[] }) {
   const listRef = useRef<HTMLUListElement>(null);
   const [paused, setPaused] = useState(false);
   const active = notices.filter((n) => n.isActive);
@@ -158,7 +158,7 @@ export default function AcademicAndNotice({ notices }: { notices: Notice[] }) {
           </div>
 
           {/* RIGHT — Notice Board */}
-          <div className="w-full lg:w-80 xl:w-96 shrink-0">
+          <div className="hidden lg:flex w-full lg:w-80 xl:w-96 shrink-0">
             <NoticePannel notices={notices} />
           </div>
         </div>

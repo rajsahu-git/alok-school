@@ -9,6 +9,7 @@ const quickLinks = [
   { label: "Alumni Registration", href: "/online/alumni" },
   { label: "School Uniform", href: "/online/uniform" },
   { label: "Career", href: "/career" },
+  { label: "Contact-us", href: "/contact" },
 ];
 
 const exploreLinks = [

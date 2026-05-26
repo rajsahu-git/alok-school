@@ -4,7 +4,7 @@ import HomeSlider from "@/core/widgets/home/HomeSlider";
 import AlokGalllery from "@/core/widgets/home/AlokGalllery";
 import ContactForm from "@/core/widgets/home/ContactForm";
 import AchievementSlider from "@/core/widgets/home/AchievementSlider";
-import AcademicAndNotice from "@/core/widgets/home/AcademicAndNotice";
+import AcademicAndNotice, { NoticePannel } from "@/core/widgets/home/AcademicAndNotice";
 import FaqSection from "@/core/widgets/home/FaqSection";
 
 const FALLBACK_SLIDES = [
@@ -49,6 +49,9 @@ export default async function Home() {
     <main>
       <HomeSlider slides={slides} />
       <AlokValue />
+      <div className="container lg:hidden w-full lg:w-80 xl:w-96 shrink-0">
+            <NoticePannel notices={notices} />
+          </div>
       <AcademicAndNotice notices={notices} />
       <AlokHistory />
       <AlokKidsPlanet />

@@ -14,7 +14,7 @@ interface Result {
   image: { fileId: string; viewLink: string; directLink: string };
 }
 
-const STREAMS = ["Arts", "Science", "Commerce"] as const;
+const STREAMS = ["Science", "Commerce","Arts"] as const;
 
 function StudentGrid({ students, getStreamColor }: { students: Result[]; getStreamColor: (s: string | null) => string }) {
   return (
@@ -34,7 +34,7 @@ function StudentGrid({ students, getStreamColor }: { students: Result[]; getStre
           <p className="text-sm font-extrabold text-red-700 leading-tight">{r.percentage}%</p>
           <p className="text-[11px] font-bold text-gray-900 uppercase leading-tight mt-0.5">{r.studentName}</p>
           <p className={`text-[10px] font-bold uppercase mt-0.5 text-${getStreamColor(r.stream)}`}>
-            {r.stream ?? `Class ${r.studentClass}`}
+            {r.stream ?? ``}
           </p>
         </div>
       ))}
@@ -75,7 +75,7 @@ export default function ResultSection({ studentClass }: { studentClass: "10th" |
   const uniqueYears = [...new Set(results.map((r) => r.sessionYear))].sort().reverse();
 
   const is12th = studentClass === "12th";
-  const title   = is12th ? "Class XII Results" : "Class X Results";
+  const title   = is12th ? "Class XII" : "Class X";
 
   const filtered = results.filter((r) => {
     if (filterYear && r.sessionYear !== filterYear) return false;

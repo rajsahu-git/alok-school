@@ -42,7 +42,7 @@ export default function TopBar() {
         </div>
 
         {/* ── Social Icons ── */}
-        <div className="flex-shrink-0 flex items-center gap-0 border-l border-primary-foreground/20">
+        {/* <div className="flex-shrink-0 flex items-center gap-0 border-l border-primary-foreground/20">
           <a
             href="https://www.facebook.com/alokrajsamand"
             target="_blank"
@@ -67,7 +67,7 @@ export default function TopBar() {
               <circle cx="17.5" cy="6.5" r="1" fill="currentColor"/>
             </svg>
           </a>
-        </div>
+        </div> */}
 
       </div>
     </div>

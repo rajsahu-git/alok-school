@@ -39,7 +39,7 @@ const ContactForm = () => {
                 </div>
                 <div>
                   <p className="text-white/50 text-xs uppercase tracking-widest mb-0.5">Call Us</p>
-                  <p className="text-white font-semibold text-sm">+00952 224205</p>
+                  <p className="text-white font-semibold text-sm">+02952 224225</p>
                 </div>
               </div>
 
@@ -53,7 +53,7 @@ const ContactForm = () => {
                 </div>
                 <div>
                   <p className="text-white/50 text-xs uppercase tracking-widest mb-0.5">Email</p>
-                  <p className="text-white font-semibold text-sm">admissions@alokschool.org</p>
+                  <p className="text-white font-semibold text-sm">alokrajsamand@alokschool.org</p>
                 </div>
               </div>
             </div>

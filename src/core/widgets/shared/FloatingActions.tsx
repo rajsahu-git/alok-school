@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 
 const PHONE = "9414232523"; // replace with actual number
@@ -54,9 +54,19 @@ const actions = [
 
 export default function FloatingActions() {
   const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    const handler = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, [open]);
 
   return (
-    <div className="fixed bottom-6 left-6 z-50 flex  flex-col-reverse items-start gap-3">
+    <div ref={ref} className="fixed bottom-6 left-6 z-50 flex  flex-col-reverse items-start gap-3">
       {/* Action buttons */}
       {open && actions.map((a, i) => (
         <div
@@ -83,7 +93,7 @@ export default function FloatingActions() {
       ))}
 
       {/* Toggle button */}
-      <button
+      {!open&& <button
         onClick={() => setOpen((o) => !o)}
         aria-label="Toggle contact options"
         className="w-14 h-14 rounded-full bg-[#25D366] shadow-xl flex items-center justify-center hover:bg-[#1ebe5d] transition-all"
@@ -94,7 +104,7 @@ export default function FloatingActions() {
         <svg viewBox="0 0 24 24" className={`w-7 h-7 stroke-white transition-transform duration-300 fill-none ${open ? "scale-100" : "scale-0 absolute"}`} strokeWidth={2.5}>
           <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
         </svg>
-      </button>
+      </button>}
 
       <style>{`
         @keyframes fab-in {

@@ -103,35 +103,7 @@ export default function TeamProfile({ member, others, backHref, backLabel }: Tea
         </div>
 
         {/* ── Other members ── */}
-        {others.length > 0 && (
-          <div className="flex flex-col gap-6">
-            <div className="flex items-center gap-3">
-              <div className="w-3 h-3 rounded-full bg-accent" />
-              <h2 className="text-xl font-bold text-foreground" style={{ fontFamily: 'Georgia, serif' }}>
-                Other {backLabel}
-              </h2>
-            </div>
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5">
-              {others.map((m) => {
-                const p = getImgUrl(m.image);
-                return (
-                  <Link key={m._id} href={`${backHref}/${m._id}`}
-                    className="group flex flex-col">
-                    <div className="relative w-full overflow-hidden rounded-t-xl bg-secondary" style={{ minHeight: 200 }}>
-                      <img src={p} alt={m.name}
-                        className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
-                        style={{ minHeight: 200 }} />
-                    </div>
-                    <div className="w-full flex flex-col items-center justify-center gap-1 px-3 py-3 rounded-b-xl" style={{ background: '#4fc3f7' }}>
-                      <p className="text-white text-xs font-bold uppercase tracking-wide text-center leading-snug">{m.name}</p>
-                      <p className="text-white text-xs font-medium text-center">{m.designation}</p>
-                    </div>
-                  </Link>
-                );
-              })}
-            </div>
-          </div>
-        )}
+        
 
       </div>
     </section>
