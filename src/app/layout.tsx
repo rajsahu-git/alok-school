@@ -3,6 +3,7 @@ import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/core/context/AuthContext";
 import RootShell from "@/core/widgets/shared/RootShell";
+import FloatingActions from "@/core/widgets/shared/FloatingActions";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -33,6 +34,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="min-h-full flex flex-col">
         <AuthProvider>
           <RootShell>{children}</RootShell>
+          <FloatingActions />
         </AuthProvider>
       </body>
     </html>

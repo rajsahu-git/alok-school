@@ -1,6 +1,19 @@
 "use client";
 
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback, TouchEvent } from "react";
+
+function useTouchSwipe(onSwipeLeft: () => void, onSwipeRight: () => void) {
+  const startX = useRef<number | null>(null);
+  return {
+    onTouchStart: (e: TouchEvent) => { startX.current = e.touches[0].clientX; },
+    onTouchEnd: (e: TouchEvent) => {
+      if (startX.current === null) return;
+      const diff = startX.current - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 40) diff > 0 ? onSwipeLeft() : onSwipeRight();
+      startX.current = null;
+    },
+  };
+}
 
 const AUTOPLAY_INTERVAL = 4000;
 
@@ -44,12 +57,17 @@ const HomeSlider = ({ slides }: { slides: string[] }) => {
     resetTimer(next);
   };
 
+  const swipe = useTouchSwipe(handleNext, handlePrev);
+
   if (!slides.length) {
     return <div className="w-full aspect-video md:aspect-auto md:h-[40rem] bg-secondary animate-pulse" />;
   }
 
   return (
-    <div className="relative aspect-video md:aspect-auto md:h-[40rem] overflow-hidden bg-black select-none">
+    <div
+      className="relative aspect-video md:aspect-auto md:h-[40rem] overflow-hidden bg-black select-none"
+      {...swipe}
+    >
       {/* Slides — all rendered, opacity crossfade */}
       {slides.map((src, index) => (
         <div

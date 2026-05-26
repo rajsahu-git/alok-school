@@ -1,6 +1,19 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useRef, TouchEvent } from "react";
+
+function useTouchSwipe(onSwipeLeft: () => void, onSwipeRight: () => void) {
+  const startX = useRef<number | null>(null);
+  return {
+    onTouchStart: (e: TouchEvent) => { startX.current = e.touches[0].clientX; },
+    onTouchEnd: (e: TouchEvent) => {
+      if (startX.current === null) return;
+      const diff = startX.current - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 40) diff > 0 ? onSwipeLeft() : onSwipeRight();
+      startX.current = null;
+    },
+  };
+}
 
 interface PopupItem {
   _id: string;
@@ -50,6 +63,13 @@ export default function SitePopup() {
     if (slides.length <= 1) return;
     setCurrent((c) => (c + 1) % slides.length);
   }, [slides.length]);
+
+  const goPrev = useCallback(() => {
+    if (slides.length <= 1) return;
+    setCurrent((c) => (c - 1 + slides.length) % slides.length);
+  }, [slides.length]);
+
+  const swipe = useTouchSwipe(goNext, goPrev);
 
   useEffect(() => {
     if (!visible || showAdmission || slides.length <= 1) return;
@@ -107,7 +127,7 @@ export default function SitePopup() {
 
         {/* ── Image Slider ── */}
         {!showAdmission && slides.length > 0 && (
-          <div className="relative overflow-hidden">
+          <div className="relative overflow-hidden" {...swipe}>
             <div className="relative w-full" style={{ maxHeight: 520 }}>
               {slides.map((src, i) => (
                 <img key={src} src={src} alt="Announcement"
@@ -132,11 +152,11 @@ export default function SitePopup() {
                   ))}
                 </div>
                 <button onClick={() => setCurrent((c) => (c - 1 + slides.length) % slides.length)}
-                  className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/40 hover:bg-black/60 flex items-center justify-center text-white transition-colors">
+                  className="absolute hidden left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/40 hover:bg-black/60 lg:flex items-center justify-center text-white transition-colors">
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" /></svg>
                 </button>
                 <button onClick={goNext}
-                  className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/40 hover:bg-black/60 flex items-center justify-center text-white transition-colors">
+                  className="absolute hidden right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/40 hover:bg-black/60 lg:flex items-center justify-center text-white transition-colors">
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
                 </button>
               </>
