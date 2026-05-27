@@ -128,6 +128,7 @@ export default function AlumniFormsManager() {
   const [search, setSearch]         = useState("");
   const [filterStatus, setFilterStatus] = useState("all");
   const [selected, setSelected]     = useState<AlumniFormEntry | null>(null);
+  const [addingId, setAddingId]     = useState<string | null>(null);
 
   const fetchForms = useCallback(async () => {
     setLoading(true); setError(null);
@@ -139,6 +140,30 @@ export default function AlumniFormsManager() {
   }, []);
 
   useEffect(() => { fetchForms(); }, [fetchForms]);
+
+  const handleAddToAlumni = async (f: AlumniFormEntry) => {
+    if (!confirm(`Add "${f.fullName}" to Alumni Manager?`)) return;
+    setAddingId(f._id);
+    try {
+      const fd = new FormData();
+      fd.append("name",            f.fullName);
+      fd.append("batch",           f.yearOfPassing);
+      fd.append("currentPosition", f.currentProfession);
+
+      if (f.image?.fileId) {
+        const imgRes = await fetch(`/api/drive-image?id=${f.image.fileId}`);
+        const blob   = await imgRes.blob();
+        fd.append("image", new File([blob], "photo.jpg", { type: blob.type || "image/jpeg" }));
+      }
+
+      await apiClient.post("/alumni", fd);
+      await apiClient.put(`/alumni-form/${f._id}`, { status: "approved" });
+      setForms((p) => p.map((x) => x._id === f._id ? { ...x, status: "approved" } : x));
+      alert(`${f.fullName} has been added to Alumni Manager!`);
+    } catch (e: unknown) {
+      alert(e instanceof Error ? e.message : "Failed to add alumni.");
+    } finally { setAddingId(null); }
+  };
 
   // ── Stats ──
   const stats = [
@@ -282,10 +307,25 @@ export default function AlumniFormsManager() {
                           </span>
                         </td>
                         <td className="px-4 py-3">
-                          <button onClick={() => setSelected(f)}
-                            className="text-xs text-primary font-medium hover:underline whitespace-nowrap">
-                            View Details
-                          </button>
+                          <div className="flex items-center gap-2">
+                            <button onClick={() => setSelected(f)}
+                              className="text-xs text-primary font-medium hover:underline whitespace-nowrap">
+                              View Details
+                            </button>
+                            {f.status !== "approved" && (
+                              <button
+                                onClick={() => handleAddToAlumni(f)}
+                                disabled={addingId === f._id}
+                                className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-green-100 hover:bg-green-200 text-green-700 text-xs font-medium transition-colors disabled:opacity-50 whitespace-nowrap"
+                              >
+                                {addingId === f._id
+                                  ? <span className="w-3 h-3 border-2 border-green-700 border-t-transparent rounded-full animate-spin" />
+                                  : <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" /></svg>
+                                }
+                                Add to Alumni
+                              </button>
+                            )}
+                          </div>
                         </td>
                       </tr>
                     );
@@ -317,10 +357,25 @@ export default function AlumniFormsManager() {
                       <p className="text-xs text-muted-foreground">{f.classStream} · {f.yearOfPassing}</p>
                       <p className="text-xs text-muted-foreground">{f.currentProfession} · {f.cityCountry}</p>
                       <p className="text-xs text-muted-foreground">{f.email}</p>
-                      <button onClick={() => setSelected(f)}
-                        className="text-xs text-primary font-medium hover:underline text-left mt-1">
-                        View Details →
-                      </button>
+                      <div className="flex items-center gap-3 mt-1">
+                        <button onClick={() => setSelected(f)}
+                          className="text-xs text-primary font-medium hover:underline text-left">
+                          View Details →
+                        </button>
+                        {f.status !== "approved" && (
+                          <button
+                            onClick={() => handleAddToAlumni(f)}
+                            disabled={addingId === f._id}
+                            className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-green-100 hover:bg-green-200 text-green-700 text-xs font-medium transition-colors disabled:opacity-50"
+                          >
+                            {addingId === f._id
+                              ? <span className="w-3 h-3 border-2 border-green-700 border-t-transparent rounded-full animate-spin" />
+                              : <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" /></svg>
+                            }
+                            Add to Alumni
+                          </button>
+                        )}
+                      </div>
                     </div>
                   </div>
                 );

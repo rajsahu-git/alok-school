@@ -5,14 +5,27 @@ import React, { useState } from "react";
 const ContactForm = () => {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setSubmitting(true); setError(null);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (!res.ok) throw new Error("Failed to send message.");
+      setSubmitted(true);
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : "Something went wrong.");
+    } finally { setSubmitting(false); }
   };
 
   return (
@@ -125,10 +138,12 @@ const ContactForm = () => {
                   {/* Submit */}
                   <button
                     type="submit"
-                    className="w-full bg-primary text-primary-foreground py-3 rounded-lg text-sm font-semibold hover:bg-primary/90 active:scale-[0.98] transition-all duration-200"
+                    disabled={submitting}
+                    className="w-full bg-primary text-primary-foreground py-3 rounded-lg text-sm font-semibold hover:bg-primary/90 active:scale-[0.98] transition-all duration-200 disabled:opacity-60"
                   >
-                    Submit Inquiry
+                    {submitting ? "Sending…" : "Submit Inquiry"}
                   </button>
+                  {error && <p className="text-sm text-red-500">{error}</p>}
                 </form>
               )}
             </div>

@@ -89,7 +89,7 @@ const AlokValue = () => {
             <span className="block w-10 h-px bg-accent" />
           </div>
           <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">
-            Welcome to Alok Institution
+            Shaping Confident leaders for tomorrow 
           </h2>
           <p className="text-foreground/70 max-w-lg mx-auto text-base md:text-lg leading-relaxed">
             Rooted in rich Indian heritage, we cultivate future leaders through a holistic

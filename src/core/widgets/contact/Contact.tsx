@@ -47,14 +47,27 @@ const contactItems = [
 const Contact = () => {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [sent, setSent] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm((p) => ({ ...p, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSent(true);
+    setSubmitting(true); setError(null);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (!res.ok) throw new Error("Failed to send message.");
+      setSent(true);
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : "Something went wrong.");
+    } finally { setSubmitting(false); }
   };
   const displayAddress = 'Alok School Rajsamand';
  const mapUrl = `https://maps.google.com/maps?q=${encodeURIComponent(displayAddress)}&output=embed`;
@@ -117,10 +130,12 @@ const Contact = () => {
                 />
                 <button
                   type="submit"
-                  className="bg-primary text-primary-foreground px-8 py-2.5 rounded-full text-sm font-semibold hover:bg-primary/90 active:scale-95 transition-all duration-200"
+                  disabled={submitting}
+                  className="bg-primary text-primary-foreground px-8 py-2.5 rounded-full text-sm font-semibold hover:bg-primary/90 active:scale-95 transition-all duration-200 disabled:opacity-60"
                 >
-                  Send a message
+                  {submitting ? "Sending…" : "Send a message"}
                 </button>
+                {error && <p className="text-sm text-red-500">{error}</p>}
               </form>
             )}
           </div>

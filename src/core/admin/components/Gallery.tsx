@@ -20,6 +20,7 @@ interface GalleryFolder {
   name: string;
   driveId: string;
   viewLink: string;
+  order: number;
   createdAt: string;
 }
 
@@ -68,6 +69,7 @@ function FolderCard({
       </svg>
       <p className="text-sm font-medium text-foreground text-center truncate w-full">{folder.name}</p>
       <p className="text-xs text-muted-foreground">{new Date(folder.createdAt).toLocaleDateString()}</p>
+      {folder.order > 0 && <p className="text-xs text-primary font-medium">Order: {folder.order}</p>}
 
       {/* Delete button */}
       <button
@@ -131,6 +133,7 @@ export default function GalleryManager() {
   const [folders, setFolders] = useState<GalleryFolder[]>([]);
   const [foldersLoading, setFoldersLoading] = useState(true);
   const [folderName, setFolderName] = useState("");
+  const [folderOrder, setFolderOrder] = useState<number>(0);
   const [creatingFolder, setCreatingFolder] = useState(false);
   const [deletingFolderId, setDeletingFolderId] = useState<string | null>(null);
   const [folderError, setFolderError] = useState<string | null>(null);
@@ -201,9 +204,10 @@ export default function GalleryManager() {
     setFolderSuccess(null);
     try {
       const userId = getUserId();
-      await apiClient.post("/gallery/folder", { name: folderName.trim(), userId });
+      await apiClient.post("/gallery/folder", { name: folderName.trim(), order: folderOrder, userId });
       setFolderSuccess(`Folder "${folderName.trim()}" created successfully!`);
       setFolderName("");
+      setFolderOrder(0);
       await fetchFolders();
     } catch (e: unknown) {
       setFolderError(e instanceof Error ? e.message : "Failed to create folder.");
@@ -354,6 +358,14 @@ export default function GalleryManager() {
                 onChange={(e) => { setFolderName(e.target.value); setFolderError(null); setFolderSuccess(null); }}
                 onKeyDown={(e) => e.key === "Enter" && handleCreateFolder()}
                 className="flex-1 px-4 py-2.5 rounded-lg border border-border bg-background text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+              />
+              <input
+                type="number"
+                placeholder="Order"
+                value={folderOrder}
+                min={0}
+                onChange={(e) => setFolderOrder(Number(e.target.value))}
+                className="w-24 px-3 py-2.5 rounded-lg border border-border bg-background text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
               />
               <button
                 onClick={handleCreateFolder}

@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
-import { Inter, Playfair_Display } from "next/font/google";
+import { DM_Sans, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/core/context/AuthContext";
 import RootShell from "@/core/widgets/shared/RootShell";
 import FloatingActions from "@/core/widgets/shared/FloatingActions";
 
-const inter = Inter({
-  variable: "--font-inter",
+
+
+const dmSans = DM_Sans({
+  variable: "--font-dm-sans",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   display: "swap",
@@ -30,10 +32,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${playfair.variable} h-full antialiased`}>
+    <html lang="en" className={`${dmSans.variable} ${playfair.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
         <AuthProvider>
           <RootShell>{children}</RootShell>
+
           <FloatingActions />
         </AuthProvider>
       </body>

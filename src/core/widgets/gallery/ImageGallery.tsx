@@ -9,6 +9,7 @@ interface Folder {
 }
 
 export default function ImageGallery({ folders }: { folders: Folder[] }) {
+  console.log(folders)
   return (
     <section className="bg-background min-h-screen py-16">
       <div className="container">

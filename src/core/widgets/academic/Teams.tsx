@@ -53,6 +53,7 @@ interface TeamsProps {
 }
 
 export default function Teams({ members, title, basePath }: TeamsProps) {
+  console.log(members)
   return (
     <section className="py-14 bg-background">
       <div className="container flex flex-col gap-10">
@@ -70,7 +71,7 @@ export default function Teams({ members, title, basePath }: TeamsProps) {
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {members.map((m) => (
+            {[...members].sort((a, b) => new Date(b.order).getTime() - new Date(a.order).getTime()).map((m) => (
               <MemberCard key={m._id} member={m} href={`${basePath}/${m._id}`} />
             ))}
           </div>
