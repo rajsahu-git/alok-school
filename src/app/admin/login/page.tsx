@@ -1,4 +1,5 @@
 const API = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5000";
+const FRONTEND = process.env.NEXT_PUBLIC_FRONTEND_URL ?? "http://localhost:3000";
 
 export default function AdminLoginPage() {
   console.log("hello.")
@@ -29,7 +30,7 @@ export default function AdminLoginPage() {
 
         {/* Google Button */}
         <a
-          href={`${API}/api/auth/google`}
+          href={`${API}/api/auth/google?failureRedirect=${FRONTEND}/auth/failure`}
           className="w-full flex items-center justify-center gap-3 rounded-xl border border-border bg-card hover:bg-secondary active:scale-95 transition-all duration-200 px-5 py-3 shadow-sm"
         >
           <svg viewBox="0 0 48 48" className="w-5 h-5 flex-shrink-0">

@@ -1,10 +1,14 @@
+"use client";
+
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { useAuth } from "@/core/context/AuthContext";
 
 interface SidebarNavItem {
   href: string;
   label: string;
   icon?: ReactNode;
+  roles?: string[];
 }
 
 const navItems: SidebarNavItem[] = [
@@ -126,14 +130,27 @@ const navItems: SidebarNavItem[] = [
       </svg>
     ),
   },
+  {
+    href: "/admin/user-access",
+    label: "User Access Manager",
+    roles: ["superadmin"],
+    icon: (
+      <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
+      </svg>
+    ),
+  },
 
 ];
 
 export default function Sidebar() {
+  const { user } = useAuth();
   return (
     <nav className="h-full w-full" aria-label="Admin sidebar navigation">
       <div className="flex flex-col gap-1">
-        {navItems.map((item) => (
+        {navItems
+          .filter((item) => !item.roles || item.roles.includes(user?.role ?? ""))
+          .map((item) => (
           <Link key={item.href} href={item.href} className="group flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-muted-foreground transition-all hover:bg-primary hover:text-primary-foreground">
             <span className="flex h-4 w-4 flex-shrink-0">{item.icon}</span>
             <span className="flex-1">{item.label}</span>
