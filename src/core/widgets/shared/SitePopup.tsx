@@ -44,6 +44,7 @@ export default function SitePopup() {
   const [formError, setFormError]   = useState<string | null>(null);
 
   useEffect(() => {
+    if (sessionStorage.getItem("popup_shown")) return;
     fetch("/api/popup")
       .then((r) => r.ok ? r.json() : null)
       .then((data: PopupResponse | null) => {
@@ -77,7 +78,7 @@ export default function SitePopup() {
     return () => clearInterval(timer);
   }, [visible, showAdmission, slides.length, goNext]);
 
-  const close = () => setVisible(false);
+  const close = () => { sessionStorage.setItem("popup_shown", "1"); setVisible(false); };
 
   const set = (k: keyof typeof EMPTY) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     setForm((f) => ({ ...f, [k]: e.target.value })); setFormError(null);

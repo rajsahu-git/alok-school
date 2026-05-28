@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 const AlokHistory = () => {
   return (
@@ -106,8 +107,8 @@ const AlokKidsPlanet = () => {
               and give personalized attention to each child to make each one feel that she or
               he is the only..
             </p>
-            <a
-              href="/kids-planet"
+            <Link
+              href="/about-us/alok-kids"
               className="inline-flex items-center gap-3 border-2 border-primary text-foreground px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-primary hover:text-primary-foreground transition-colors duration-200"
             >
               <span className="w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center hover:text-foreground flex-shrink-0">
@@ -116,7 +117,7 @@ const AlokKidsPlanet = () => {
                 </svg>
               </span>
               Read more
-            </a>
+            </Link>
           </div>
 
           {/* Right — image collage */}

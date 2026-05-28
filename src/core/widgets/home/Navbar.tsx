@@ -54,6 +54,7 @@ const navItems = [
           { name: "Coordinators", href: "/academic/team/coordinator" }, 
         ],
       },
+      {name:"Curriculum & QPs",href:"/academic/question-bank"},
       // { name: "Coordinators", href: "/academic/coordinators" },
       { name: "Mobile App", href: "https://play.google.com/store/apps/details?id=com.next.nlp" },
       { name: "Video Tutorial", href: "/academic/video-tutorial" },

@@ -6,7 +6,7 @@ import Image from "next/image";
 const faqs = [
   {
     q: "What makes Alok Sansthan a good choice for English-medium education?",
-    a: "Alok Sansthan offers English-medium education with a focus on reading, writing and communication skills. Following both CBSE and RBSE curricula, it provides a balanced academic foundation with supportive teachers and practical teaching methods, making it a trusted choice.",
+    a: "Alok Sansthan offers English-medium education with a focus on reading, writing and communication skills. Following CBSE curricula, it provides a balanced academic foundation with supportive teachers and practical teaching methods, making it a trusted choice.",
   },
   {
     q: "Why is Alok Sansthan considered a top performing school in Rajsamand?",

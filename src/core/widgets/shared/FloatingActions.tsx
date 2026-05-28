@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 
 const PHONE = "9414232523"; // replace with actual number
@@ -53,8 +54,11 @@ const actions = [
 ];
 
 export default function FloatingActions() {
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+
+ 
 
   useEffect(() => {
     if (!open) return;
@@ -64,7 +68,7 @@ export default function FloatingActions() {
     document.addEventListener("mousedown", handler);
     return () => document.removeEventListener("mousedown", handler);
   }, [open]);
-
+ if (pathname.startsWith("/admin")) return null;
   return (
     <div ref={ref} className="fixed bottom-6 left-6 z-50 flex  flex-col-reverse items-start gap-3">
       {/* Action buttons */}
