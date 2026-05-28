@@ -13,7 +13,7 @@ export default async function MediaPage() {
         breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'Newspaper Coverage' }]}
       />
       <section className="max-w-6xl mx-auto px-4 py-10">
-        <TabNav />
+        {/* <TabNav /> */}
         {images.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-24 text-muted-foreground gap-3">
             <svg className="w-12 h-12 opacity-30" fill="none" stroke="currentColor" viewBox="0 0 24 24">

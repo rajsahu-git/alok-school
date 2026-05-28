@@ -95,7 +95,15 @@ const navItems = [
       { name: "Admission", href: "/admission" },
       { name: "Alumni Registration", href: "/online/alumni" },
       { name: "School Uniform", href: "/online/uniform" },
-      {name: "Articals & media", href:"/online/artical-media"}
+      {
+        name: "News & Media",
+        href: "/online/artical-media",
+        children: [
+          { name: "Newspaper Coverage", href: "/online/artical-media/media" },
+          { name: "School News / Articles", href: "/online/artical-media/news" }, 
+           
+        ],
+      },
     ],
   },
   { name: "Result", href: "/result", children:[
