@@ -53,7 +53,7 @@ export default function QuestionBank() {
   return (
     <>
       <PageHero
-        title="Question Bank"
+        title="Curriculum and Question Paper's"
         breadcrumbs={[
           { label: "Home", href: "/" },
           { label: "Academic", href: "/academic" },
@@ -129,9 +129,9 @@ export default function QuestionBank() {
                   </div>
 
                   {/* Download */}
-                  {b.pdf?.viewLink && (
+                  {b.pdf?.directLink && (
                     <a
-                      href={b.pdf.viewLink}
+                      href={b.pdf.directLink}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex-shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-lg bg-primary text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity"

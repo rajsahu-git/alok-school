@@ -60,6 +60,7 @@ const navItems = [
       { name: "Video Tutorial", href: "/academic/video-tutorial" },
       { name: "Skill Subject", href: "/academic/skill-subject" },
       { name: "Annual Calendar", href: "/academic/calendar" },
+      
     ],
   },
   {
@@ -94,6 +95,7 @@ const navItems = [
       { name: "Admission", href: "/admission" },
       { name: "Alumni Registration", href: "/online/alumni" },
       { name: "School Uniform", href: "/online/uniform" },
+      {name: "Articals & media", href:"/online/artical-media"}
     ],
   },
   { name: "Result", href: "/result", children:[

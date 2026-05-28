@@ -95,6 +95,16 @@ const navItems: SidebarNavItem[] = [
     ),
   },
   {
+    href: "/admin/article",
+    label: "Article Management",
+    icon: (
+      <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10l4 4v10a2 2 0 01-2 2z" />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 4v4h4M9 10h6M9 14h6" />
+      </svg>
+    ),
+  },
+  {
     href: "/admin/notice",
     label: "Notice Management",
     icon: (
