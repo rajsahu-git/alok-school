@@ -4,7 +4,7 @@ import PageHero from '@/core/widgets/shared/PageHero';
 import MediaGrid from '@/core/widgets/academic/MediaGrid';
 
 export default async function MediaPage() {
-  const images = await fetchActivityImages('6a158155f7ddb9f962ff9fc8');
+  const images = await fetchActivityImages('6a1826c218979b1cd6f095ed');
 
   return (
     <>
