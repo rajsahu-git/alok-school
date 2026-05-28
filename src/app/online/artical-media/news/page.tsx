@@ -19,7 +19,7 @@ export default async function ArticalMediaPage() {
   return (
     <>
       <PageHero title="School News / Articles" breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'School News / Articles' }]} />
-      <TabNav />
+      
       <MediaArtical articles={articles} />
     </>
   );
