@@ -250,7 +250,7 @@ function Navbar() {
       <div className="container">
         <div className="flex h-16 items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
-            <img className="w-44" src="https://rajsamand.alokschool.org/wp-content/uploads/2021/06/alokh-logo.png" alt="Alok" />
+            <img className="w-28" src="https://alokschool.org/wp-content/uploads/2026/03/alok-school-logo.webp#1289" alt="Alok" />
           </Link>
 
           <div className="hidden  lg:flex items-stretch gap-1" onMouseLeave={handleMenuLeave}>

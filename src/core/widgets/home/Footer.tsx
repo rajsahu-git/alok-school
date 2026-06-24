@@ -37,7 +37,7 @@ const Footer = () => {
             {/* ── Col 1: Brand + About ── */}
             <div className="flex flex-col gap-4">
               <img
-                src="https://rajsamand.alokschool.org/wp-content/uploads/2021/06/alokh-logo.png"
+                src="https://alokschool.org/wp-content/uploads/2026/03/alok-school-logo.webp#1289"
                 alt="Alok School"
                 className="w-36"
               />
