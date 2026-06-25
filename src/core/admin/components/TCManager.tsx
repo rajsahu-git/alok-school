@@ -86,7 +86,7 @@ export default function TCManager() {
 
   // ── Save ──
   const handleSave = async () => {
-    if (!form.scholarNumber.trim() || !form.name.trim() || !form.fatherName.trim() || !form.dob || !form.lastClass.trim()) {
+    if (!form.scholarNumber.trim() ) {
       setError("All fields are required."); return;
     }
     if (!editingId && !tcFile) { setError("TC file is required."); return; }
@@ -162,9 +162,9 @@ export default function TCManager() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {[
               { k: "scholarNumber", label: "Scholar Number *",  placeholder: "e.g. 2024001" },
-              { k: "name",          label: "Student Name *",    placeholder: "e.g. Rahul Sharma" },
-              { k: "fatherName",    label: "Father's Name *",   placeholder: "e.g. Suresh Sharma" },
-              { k: "lastClass",     label: "Last Class *",      placeholder: "e.g. Class X" },
+              { k: "name",          label: "Student Name",    placeholder: "e.g. Rahul Sharma" },
+              { k: "fatherName",    label: "Father's Name",   placeholder: "e.g. Suresh Sharma" },
+              { k: "lastClass",     label: "Last Class",      placeholder: "e.g. Class X" },
             ].map(({ k, label, placeholder }) => (
               <div key={k} className="flex flex-col gap-1.5">
                 <label className="text-xs font-medium text-muted-foreground">{label}</label>
@@ -173,7 +173,7 @@ export default function TCManager() {
             ))}
 
             <div className="flex flex-col gap-1.5">
-              <label className="text-xs font-medium text-muted-foreground">Date of Birth *</label>
+              <label className="text-xs font-medium text-muted-foreground">Date of Birth</label>
               <input type="date" value={form.dob} onChange={set("dob")} className={inputCls} />
             </div>
 
