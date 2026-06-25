@@ -1,9 +1,11 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import type { Metadata } from 'next';
 import PageHero from '@/core/widgets/shared/PageHero';
 import type { Article } from '@/core/widgets/academic/MediaArtical';
 
 const BASE = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:5000';
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://rajsamand.alokschool.org';
 
 async function getArticle(slug: string): Promise<Article | null> {
   try {
@@ -20,6 +22,40 @@ async function getAllArticles(): Promise<Article[]> {
     const data = await res.json();
     return data.articles ?? [];
   } catch { return []; }
+}
+
+function stripHtml(html: string, maxLength = 160): string {
+  const text = html.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+  return text.length > maxLength ? `${text.slice(0, maxLength).trim()}…` : text;
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const article = await getArticle(slug);
+  if (!article) return {};
+
+  const description = stripHtml(article.content);
+  const imageUrl = article.thumbnail?.fileId
+    ? `${SITE_URL}/api/drive-image?id=${article.thumbnail.fileId}`
+    : undefined;
+
+  return {
+    title: article.title,
+    description,
+    openGraph: {
+      title: article.title,
+      description,
+      url: `${SITE_URL}/online/artical-media/${slug}`,
+      type: 'article',
+      images: imageUrl ? [{ url: imageUrl, width: 1200, height: 630, alt: article.title }] : undefined,
+    },
+    twitter: {
+      card: imageUrl ? 'summary_large_image' : 'summary',
+      title: article.title,
+      description,
+      images: imageUrl ? [imageUrl] : undefined,
+    },
+  };
 }
 
 export default async function ArticleDetailPage({ params }: { params: Promise<{ slug: string }> }) {
