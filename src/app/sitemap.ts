@@ -2,7 +2,7 @@ import type { MetadataRoute } from 'next';
 
 type ChangeFreq = 'always' | 'hourly' | 'daily' | 'weekly' | 'monthly' | 'yearly' | 'never';
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://alokschool.org';
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://rajsamand.alokschool.org';
 const API_BASE = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:5000';
 
 const staticRoutes: { path: string; changeFrequency: ChangeFreq; priority: number }[] = [
