@@ -21,12 +21,26 @@ const playfair = Playfair_Display({
   display: "swap",
 });
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://rajsamand.alokschool.org";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: "Alok Sansthan",
   description: "A Truly Indian International Educational Institution",
   icons: {
     icon: "/icon.jpg",
     apple: "/icon.jpg",
+  },
+  openGraph: {
+    title: "Alok Sansthan",
+    description: "A Truly Indian International Educational Institution",
+    siteName: "Alok Sansthan",
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "Alok Sansthan",
+    description: "A Truly Indian International Educational Institution",
   },
 };
 
