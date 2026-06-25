@@ -54,6 +54,11 @@ const nextConfig: NextConfig = {
         destination: '/academic/team/teachers',
         permanent: true,
       },
+      {
+        source: '/our-teacher',
+        destination: '/academic/team/teachers',
+        permanent: true,
+      },
       
     ];
   },
