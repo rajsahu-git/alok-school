@@ -55,18 +55,14 @@ export default function VideoGallery({ videos }: { videos: Video[] }) {
                     </div>
                   </div>
                   {/* YT badge */}
-                  <span className="absolute top-2 left-2 bg-red-600 text-white text-[10px] font-bold px-1.5 py-0.5 rounded">
-                    YT
-                  </span>
+                  
                 </div>
                 {/* Title */}
                 <div className="px-4 py-3">
                   <p className="text-sm font-semibold text-foreground line-clamp-2 leading-snug">
                     {video.title ?? "Untitled"}
                   </p>
-                  <p className="text-xs text-muted-foreground mt-1">
-                    {new Date(video.createdAt).toLocaleDateString("en-IN", { year: "numeric", month: "short", day: "numeric" })}
-                  </p>
+                  
                 </div>
               </button>
             );

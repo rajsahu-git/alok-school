@@ -6,10 +6,10 @@ function page() {
   return (
     <div>
             <PageHero
-        title="Principals' Pen"
+        title="Principal's Pen"
         breadcrumbs={[
           { label: "Home", href: "/" },
-          { label: "Principals' Pen" },
+          { label: "Principal's Pen" },
         ]}
       />
       

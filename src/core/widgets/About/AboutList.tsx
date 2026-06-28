@@ -21,7 +21,7 @@ const cards = [
     link: "#directors-pen",
   },
   {
-    title: "Principals' Pen",
+    title: "Principal's Pen",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="w-8 h-8">
         <path d="M12 19l7-7 3 3-7 7-3-3z" />

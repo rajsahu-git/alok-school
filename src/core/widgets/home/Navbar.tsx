@@ -13,8 +13,8 @@ const navItems = [
     href: "/about-us",
     children: [
       { name: "Origin & History", href: "/about-us/origin" },
-      { name: "Directors' Pen", href: "/about-us/directors-pen" },
-      { name: "Principals' Pen", href: "/about-us/principals-pen" },
+      { name: "Director's Pen", href: "/about-us/directors-pen" },
+      { name: "Principal's Pen", href: "/about-us/principals-pen" },
       { name: "Our Administrator", href: "/about-us/administrator" },
       { name: "Our Alumni", href: "/about-us/our-alumni" },
       { name: "Vision & Mission", href: "/about-us/vision-mission" },
