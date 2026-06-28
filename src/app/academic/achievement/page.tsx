@@ -26,7 +26,7 @@ export default async function AchievementPage() {
         title=" Our Achievements"
         breadcrumbs={[
           { label: 'Home', href: '/' },
-          { label: 'Academic', href: '/academic' },
+          { label: 'Academic', href: '/' },   
           { label: 'Achievement' },
         ]}
       />
