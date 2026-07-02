@@ -14,7 +14,7 @@ export default async function TeacherProfilePage({ params }: { params: Promise<{
         title={member.name}
         breadcrumbs={[
           { label: 'Home', href: '/' },
-          { label: 'Academic', href: '/academic' },
+          { label: 'Academic', href: '/' },
           { label: 'Our Teachers', href: '/academic/team/teachers' },
           { label: member.name },
         ]}

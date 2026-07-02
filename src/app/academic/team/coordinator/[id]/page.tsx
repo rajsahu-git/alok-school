@@ -14,7 +14,7 @@ export default async function CoordinatorProfilePage({ params }: { params: Promi
         title={member.name}
         breadcrumbs={[
           { label: 'Home', href: '/' },
-          { label: 'Academic', href: '/academic' },
+          { label: 'Academic', href: '/' },
           { label: 'Coordinators', href: '/academic/team/coordinator' },
           { label: member.name },
         ]}

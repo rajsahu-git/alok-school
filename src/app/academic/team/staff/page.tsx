@@ -6,7 +6,7 @@ export default async function StaffPage() {
   const members = await fetchByCategory('office staff');
   return (
     <>
-      <PageHero title="Office Staff" breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'Academic', href: '/academic' }, { label: 'Office Staff' }]} />
+      <PageHero title="Office Staff" breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'Academic', href: '/' }, { label: 'Office Staff' }]} />
       <Teams members={members} title="Office Staff" basePath="/academic/team/staff" />
     </>
   );

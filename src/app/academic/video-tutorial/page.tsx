@@ -15,7 +15,7 @@ export default function VideoTutorialPage() {
         title="Video Tutorial"
         breadcrumbs={[
           { label: 'Home', href: '/' },
-          { label: 'Academic', href: '/academic' },
+          { label: 'Academic', href: '/' },
           { label: 'Video Tutorial' },
         ]}
       />

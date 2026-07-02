@@ -7,7 +7,7 @@ export default function CalendarPage() {
         title="Annual Calendar"
         breadcrumbs={[
           { label: 'Home', href: '/' },
-          { label: 'Academic', href: '/academic' },
+          { label: 'Academic', href: '/' },
           { label: 'Annual Calendar' },
         ]}
       />

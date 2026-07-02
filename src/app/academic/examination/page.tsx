@@ -30,7 +30,7 @@ export default async function ExaminationPage() {
         title="Examination Announcement"
         breadcrumbs={[
           { label: 'Home', href: '/' },
-          { label: 'Academic', href: '/academic' },
+          { label: 'Academic', href: '/' },
           { label: 'Examination Announcement' },
         ]}
       />

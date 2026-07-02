@@ -42,9 +42,7 @@ export default function TeamProfile({ member, others, backHref, backLabel }: Tea
               <h1 className="text-xl md:text-2xl font-bold text-foreground" style={{ fontFamily: 'Georgia, serif' }}>
                 {member.name}
               </h1>
-              <p className="text-sm text-muted-foreground mt-1">
-                Designation – {member.designation}
-              </p>
+
             </div>
 
             {/* Info card */}
@@ -54,7 +52,7 @@ export default function TeamProfile({ member, others, backHref, backLabel }: Tea
 
               {/* Education */}
               <div className="flex flex-col sm:flex-row sm:items-center gap-2">
-                <span className="text-sm font-bold text-foreground w-32 flex-shrink-0">Education</span>
+                <span className="text-sm font-bold text-foreground w-32 flex-shrink-0">Designation</span>
                 <span className="bg-primary text-primary-foreground text-xs font-bold px-3 py-1.5 rounded uppercase tracking-wide">
                   {member.education}
                 </span>

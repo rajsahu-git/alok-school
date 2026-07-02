@@ -6,7 +6,7 @@ export default async function TeachersPage() {
   const members = await fetchByCategory('teaching');
   return (
     <>
-      <PageHero title="Our Teachers" breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'Academic', href: '/academic' }, { label: 'Our Teachers' }]} />
+      <PageHero title="Our Teachers" breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'Academic', href: '/' }, { label: 'Our Teachers' }]} />
       <Teams members={members} title="Our Teachers" basePath="/academic/team/teachers" />
     </>
   );
