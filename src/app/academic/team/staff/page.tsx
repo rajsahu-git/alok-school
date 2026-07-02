@@ -3,7 +3,7 @@ import PageHero from '@/core/widgets/shared/PageHero';
 import { fetchByCategory } from '@/lib/teamApi';
 
 export default async function StaffPage() {
-  const members = await fetchByCategory('office staff');
+  const members = await fetchByCategory('staff');
   return (
     <>
       <PageHero title="Office Staff" breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'Academic', href: '/' }, { label: 'Office Staff' }]} />
