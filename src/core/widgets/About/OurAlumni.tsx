@@ -1,41 +1,37 @@
 import type { AlumniItem } from "@/app/about-us/our-alumni/page";
 
-const SCALLOP =
-  "polygon(50% 0%,56% 2%,62% 0%,67% 4%,73% 3%,77% 8%,83% 8%,86% 14%,92% 15%,94% 21%,99% 24%,100% 30%,100% 37%,99% 43%,100% 49%,98% 55%,100% 61%,97% 67%,97% 73%,93% 78%,91% 84%,86% 88%,83% 93%,77% 96%,73% 100%,67% 100%,62% 98%,56% 100%,50% 98%,44% 100%,38% 100%,33% 97%,27% 96%,23% 92%,17% 89%,14% 84%,9% 80%,7% 74%,3% 70%,1% 64%,0% 58%,1% 52%,0% 46%,1% 40%,0% 34%,2% 28%,5% 22%,9% 17%,13% 12%,18% 8%,23% 5%,29% 3%,35% 1%,41% 0%,47% 2%)";
-
 function AlumniCard({ a }: { a: AlumniItem }) {
   const photo = `/api/drive-image?id=${a.image.fileId}`;
 
   return (
-    <div className="bg-card rounded-xl border border-border p-6 flex flex-col items-center text-center shadow-sm hover:shadow-md transition-shadow duration-300">
+    <div className="bg-card rounded-xl border border-border overflow-hidden flex flex-col items-center text-center shadow-sm hover:shadow-md transition-shadow duration-300">
 
-      {/* Scalloped photo */}
-      <div className="relative w-32 h-32 mb-4 flex-shrink-0">
-        <div
-          className="absolute inset-0 rounded-full"
-          style={{ background: "var(--secondary)", clipPath: SCALLOP }}
-        />
+      {/* Photo */}
+      <div className="relative w-full aspect-4/5 shrink-0 bg-secondary/20">
         <img
           src={photo}
           alt={a.name}
-          className="absolute inset-0 w-full h-full object-cover rounded-full p-2"
+          loading="lazy"
+          className="absolute inset-0 w-full h-full object-cover object-center"
         />
       </div>
 
-      {/* Name */}
-      <h3 className="text-sm font-bold text-foreground mb-1 leading-snug">{a.name}</h3>
+      <div className="p-6 flex flex-col items-center text-center w-full">
+        {/* Name */}
+        <h3 className="text-sm font-bold text-foreground mb-1 leading-snug">{a.name}</h3>
 
-      {/* Position */}
-      <p className="text-xs font-semibold tracking-widest text-primary uppercase leading-relaxed mb-1">
-        {a.currentPosition}
-      </p>
+        {/* Position */}
+        <p className="text-xs font-semibold tracking-widest text-primary uppercase leading-relaxed mb-1">
+          {a.currentPosition}
+        </p>
 
-      {/* Batch */}
-      <p className="text-xs text-muted-foreground font-medium">Batch: {a.batch}</p>
+        {/* Batch */}
+        <p className="text-xs text-muted-foreground font-medium">Batch: {a.batch}</p>
+      </div>
 
       {/* Social links */}
       {(a.linkedin || a.github || a.twitter) && (
-        <div className="flex items-center justify-center gap-3 mt-3 pt-3 border-t border-border w-full">
+        <div className="flex items-center justify-center gap-3 pb-6 pt-3 border-t border-border w-full px-6">
           {a.linkedin && (
             <a href={a.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"
               className="text-muted-foreground hover:text-primary transition-colors">
