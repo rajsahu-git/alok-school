@@ -34,6 +34,7 @@ export default function AlumaniForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!image) { setError("Please upload your recent photograph."); return; }
     if (!confirmed) { setError("Please confirm that the above information is correct."); return; }
 
     setSubmitting(true); setError(null);
@@ -187,7 +188,7 @@ export default function AlumaniForm() {
 
                 {/* Photo Upload */}
                 <div>
-                  <label className={labelCls}>Upload Recent Photograph</label>
+                  <label className={labelCls}>Upload Recent Photograph <span className="text-red-500">*</span></label>
                   <div
                     onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
                     onDragLeave={() => setDragOver(false)}
@@ -236,7 +237,7 @@ export default function AlumaniForm() {
                 )}
 
                 {/* Submit */}
-                <button type="submit" disabled={submitting || !confirmed}
+                <button type="submit" disabled={submitting || !confirmed || !image}
                   className="self-start flex items-center gap-2 px-8 py-3 rounded-lg bg-primary text-primary-foreground text-sm font-bold disabled:opacity-50 hover:opacity-90 transition-opacity">
                   {submitting && <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />}
                   {submitting ? "Submitting…" : "Register as Alumni"}

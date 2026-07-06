@@ -19,7 +19,7 @@ const exploreLinks = [
   { label: "Transport", href: "/infrastructure/transport" },
   { label: "Library", href: "/infrastructure/library" },
   { label: "Lab", href: "/infrastructure/lab" },
-  { label: "Activities", href: "/activities" },
+  // { label: "Activities", href: "/activities" },
   { label: "Image Gallery", href: "/gallery/images" },
 ];
 
