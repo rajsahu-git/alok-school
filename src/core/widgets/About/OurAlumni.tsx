@@ -16,22 +16,22 @@ function AlumniCard({ a }: { a: AlumniItem }) {
         />
       </div>
 
-      <div className="p-6 flex flex-col items-center text-center w-full">
+      <div className="p-3 sm:p-6 flex flex-col items-center text-center w-full">
         {/* Name */}
-        <h3 className="text-sm font-bold text-foreground mb-1 leading-snug">{a.name}</h3>
+        <h3 className="text-xs sm:text-sm font-bold text-foreground mb-1 leading-snug">{a.name}</h3>
 
         {/* Position */}
-        <p className="text-xs font-semibold tracking-widest text-primary uppercase leading-relaxed mb-1">
+        <p className="text-[10px] sm:text-xs font-semibold tracking-widest text-primary uppercase leading-relaxed mb-1">
           {a.currentPosition}
         </p>
 
         {/* Batch */}
-        <p className="text-xs text-muted-foreground font-medium">Batch: {a.batch}</p>
+        <p className="text-[10px] sm:text-xs text-muted-foreground font-medium">Batch: {a.batch}</p>
       </div>
 
       {/* Social links */}
       {(a.linkedin || a.github || a.twitter) && (
-        <div className="flex items-center justify-center gap-3 pb-6 pt-3 border-t border-border w-full px-6">
+        <div className="flex items-center justify-center gap-3 pb-3 sm:pb-6 pt-3 border-t border-border w-full px-3 sm:px-6">
           {a.linkedin && (
             <a href={a.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"
               className="text-muted-foreground hover:text-primary transition-colors">
@@ -97,7 +97,7 @@ export default function OurAlumni({ alumni }: { alumni: AlumniItem[] }) {
             <p className="text-sm">No alumni profiles available yet.</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-6">
             {alumni.map((a) => <AlumniCard key={a._id} a={a} />)}
           </div>
         )}
