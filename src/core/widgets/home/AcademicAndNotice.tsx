@@ -8,6 +8,7 @@ interface Notice {
   isActive: boolean;
   link?: string;
   pdf?: { viewLink: string };
+  image?: { viewLink: string };
 }
 
 const programs = [
@@ -80,7 +81,7 @@ export function NoticePannel({ notices }: { notices: Notice[] }) {
         ) : (
           <ul ref={listRef} className="absolute w-full will-change-transform">
             {[...active, ...active].map((notice, i) => {
-              const href = notice.pdf?.viewLink ?? notice.link ?? "#";
+              const href = notice.pdf?.viewLink ?? notice.image?.viewLink ?? notice.link ?? "#";
               return (
                 <li
                   key={`${notice._id}-${i}`}

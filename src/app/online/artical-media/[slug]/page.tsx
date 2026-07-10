@@ -131,9 +131,7 @@ export default async function ArticleDetailPage({ params }: { params: Promise<{ 
                     )}
                     <div className="flex flex-col gap-1 min-w-0">
                       <p className="text-sm font-medium text-foreground line-clamp-3 group-hover:text-primary transition-colors">{a.title}</p>
-                      <p className="text-xs text-muted-foreground">
-                        {new Date(a.createdAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}
-                      </p>
+
                     </div>
                   </Link>
                 );

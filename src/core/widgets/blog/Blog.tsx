@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import type { BlogPost } from '@/app/blog/page';
+import ShareButtons from '@/core/widgets/shared/ShareButtons';
 
 function getThumbnailUrl(thumbnail?: BlogPost['thumbnail']): string | null {
   if (!thumbnail?.fileId) return null;
@@ -14,26 +15,31 @@ function BlogCard({ blog }: { blog: BlogPost }) {
   });
 
   return (
-    <Link href={`/blog/${blog._id}`} className="group flex flex-col rounded-2xl border border-border bg-card overflow-hidden hover:shadow-lg transition-shadow duration-300">
-      {imgUrl ? (
-        <div className="w-full aspect-video overflow-hidden bg-secondary">
-          <img src={imgUrl} alt={blog.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
-        </div>
-      ) : (
-        <div className="w-full aspect-video bg-secondary flex items-center justify-center text-muted-foreground text-sm">No Image</div>
-      )}
-      <div className="flex flex-col gap-2 p-4 flex-1">
-        {blog.tags?.length > 0 && (
-          <div className="flex flex-wrap gap-1">
-            {blog.tags.slice(0, 3).map((t) => (
-              <span key={t} className="text-xs px-2 py-0.5 rounded-full bg-primary/10 text-primary font-medium">{t}</span>
-            ))}
+    <div className="group flex flex-col rounded-2xl border border-border bg-card overflow-hidden hover:shadow-lg transition-shadow duration-300">
+      <Link href={`/blog/${blog._id}`} className="flex flex-col flex-1">
+        {imgUrl ? (
+          <div className="w-full aspect-video overflow-hidden bg-secondary">
+            <img src={imgUrl} alt={blog.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
           </div>
+        ) : (
+          <div className="w-full aspect-video bg-secondary flex items-center justify-center text-muted-foreground text-sm">No Image</div>
         )}
-        <h2 className="text-base font-semibold text-foreground line-clamp-2 group-hover:text-primary transition-colors">{blog.title}</h2>
-        <p className="text-xs text-muted-foreground mt-auto">{date}</p>
+        <div className="flex flex-col gap-2 p-4 flex-1">
+          {blog.tags?.length > 0 && (
+            <div className="flex flex-wrap gap-1">
+              {blog.tags.slice(0, 3).map((t) => (
+                <span key={t} className="text-xs px-2 py-0.5 rounded-full bg-primary/10 text-primary font-medium">{t}</span>
+              ))}
+            </div>
+          )}
+          <h2 className="text-base font-semibold text-foreground line-clamp-2 group-hover:text-primary transition-colors">{blog.title}</h2>
+        </div>
+      </Link>
+      <div className="flex items-center justify-between px-4 pb-4">
+        <p className="text-xs text-muted-foreground">{date}</p>
+        <ShareButtons url={`/blog/${blog._id}`} title={blog.title} />
       </div>
-    </Link>
+    </div>
   );
 }
 

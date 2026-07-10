@@ -13,7 +13,7 @@ interface Notice {
 export default function NoticeBoard({ notices }: { notices: Notice[] }) {
   const listRef = useRef<HTMLUListElement>(null);
   const [paused, setPaused] = useState(false);
-
+  console.log("notice...",notices)
   useEffect(() => {
     const el = listRef.current;
     if (!el) return;

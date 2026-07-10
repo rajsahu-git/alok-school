@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import TabNav from './TabNav';
+import ShareButtons from '@/core/widgets/shared/ShareButtons';
 
 interface ArticleThumbnail { fileId: string; viewLink: string; directLink: string; }
 export interface Article {
@@ -21,19 +22,24 @@ function ArticleCard({ article }: { article: Article }) {
   });
 
   return (
-    <Link href={`/online/artical-media/${article.slug}`} className="group flex flex-col rounded-2xl border border-border bg-card overflow-hidden hover:shadow-lg transition-shadow duration-300">
-      {imgUrl ? (
-        <div className="w-full aspect-video overflow-hidden bg-secondary">
-          <img src={imgUrl} alt={article.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+    <div className="group flex flex-col rounded-2xl border border-border bg-card overflow-hidden hover:shadow-lg transition-shadow duration-300">
+      <Link href={`/online/artical-media/${article.slug}`} className="flex flex-col flex-1">
+        {imgUrl ? (
+          <div className="w-full aspect-video overflow-hidden bg-secondary">
+            <img src={imgUrl} alt={article.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+          </div>
+        ) : (
+          <div className="w-full aspect-video bg-secondary flex items-center justify-center text-muted-foreground text-sm">No Image</div>
+        )}
+        <div className="flex flex-col gap-2 p-4 flex-1">
+          <h2 className="text-base font-semibold text-foreground line-clamp-2 group-hover:text-primary transition-colors">{article.title}</h2>
         </div>
-      ) : (
-        <div className="w-full aspect-video bg-secondary flex items-center justify-center text-muted-foreground text-sm">No Image</div>
-      )}
-      <div className="flex flex-col gap-2 p-4 flex-1">
-        <h2 className="text-base font-semibold text-foreground line-clamp-2 group-hover:text-primary transition-colors">{article.title}</h2>
-        <p className="text-xs text-muted-foreground mt-auto">{date}</p>
+      </Link>
+      <div className="flex items-center justify-between px-4 pb-4">
+        <p className="text-xs text-muted-foreground">{date}</p>
+        <ShareButtons url={`/online/artical-media/${article.slug}`} title={article.title} />
       </div>
-    </Link>
+    </div>
   );
 }
 

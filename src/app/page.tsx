@@ -36,6 +36,7 @@ async function getNotices() {
     const res = await fetch(`${base}/api/notice`, { cache: "no-store" });
     if (!res.ok) return [];
     const data = await res.json();
+    console.log("data,,,..",data)
     return data.notices ?? [];
   } catch {
     return [];
