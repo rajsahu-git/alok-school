@@ -8,6 +8,22 @@ function isUpcoming(dateTo: string) {
   return new Date(dateTo) >= new Date();
 }
 
+function Description({ text }: { text: string }) {
+  const points = text.split(/(?=\(\d+\))/g).map((s) => s.trim()).filter(Boolean);
+
+  if (points.length > 1) {
+    return (
+      <ul className="text-xs text-muted-foreground leading-relaxed flex flex-col gap-1 list-none">
+        {points.map((point, i) => (
+          <li key={i}>{point}</li>
+        ))}
+      </ul>
+    );
+  }
+
+  return <p className="text-xs text-muted-foreground leading-relaxed line-clamp-2">{text}</p>;
+}
+
 export default function Examination({ notices }: { notices: ExamNotice[] }) {
   const upcoming = notices.filter((n) => isUpcoming(n.examDateTo));
   const past     = notices.filter((n) => !isUpcoming(n.examDateTo));
@@ -98,16 +114,13 @@ function NoticeCard({ notice: n, active }: { notice: ExamNotice; active: boolean
             <span className="text-[10px] font-bold uppercase tracking-wide bg-secondary text-muted-foreground px-2 py-0.5 rounded-full">Completed</span>
           )}
         </div>
-        <p className="text-xs text-muted-foreground leading-relaxed line-clamp-2">{n.description}</p>
+        <Description text={n.description} />
         <div className="flex flex-wrap items-center gap-3 mt-1">
           <span className="inline-flex items-center gap-1.5 text-xs text-foreground font-medium">
             <svg className="w-3.5 h-3.5 text-primary" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
             </svg>
             {fmt(n.examDateFrom)} — {fmt(n.examDateTo)}
-          </span>
-          <span className="text-xs text-muted-foreground">
-            Posted: {fmt(n.createdAt)}
           </span>
         </div>
       </div>

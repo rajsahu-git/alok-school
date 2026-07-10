@@ -95,15 +95,15 @@ const navItems = [
       { name: "Admission", href: "/admission" },
       { name: "Alumni Registration", href: "/online/alumni" },
       { name: "School Uniform", href: "/online/uniform" },
-      {
-        name: "News & Media",
-        href: "/online/artical-media",
-        children: [
-          { name: "Newspaper Coverage", href: "/online/artical-media/media" },
-          { name: "School News / Articles", href: "/online/artical-media/news" }, 
+      // {
+      //   name: "News & Media",
+      //   href: "/online/artical-media",
+      //   children: [
+      //     { name: "Newspaper Coverage", href: "/online/artical-media/media" },
+      //     { name: "School News / Articles", href: "/online/artical-media/news" }, 
            
-        ],
-      },
+      //   ],
+      // },
     ],
   },
   { name: "Result", href: "/result", children:[
@@ -112,7 +112,11 @@ const navItems = [
   ] 
 },
   // { name: "Contact", href: "/contact" },
-  { name: "Blog", href: "/blog" },
+  { name: "Media", href: "/media", children:[
+    {name:"Blog", href: "/blog" },
+  { name: "Newspaper Coverage", href: "/online/artical-media/media" },
+   { name: "School News / Articles", href: "/online/artical-media/news" }, 
+  ] },
 ];
 
 function Navbar() {
@@ -205,7 +209,7 @@ function Navbar() {
             {openSubMenu === item.name && (
               <div className="pl-4 bg-secondary/30">
                 {item.children.map((child) =>
-                  child.children ? (
+                  child?.children ? (
                     <div key={child.name}>
                       <button
                         className="flex items-center justify-between w-full px-4 py-2 text-left text-sm text-muted-foreground"
@@ -218,7 +222,7 @@ function Navbar() {
                       </button>
                       {openMenu === child.name && (
                         <div className="pl-4">
-                          {child.children.map((sub) => (
+                          {child?.children?.map((sub) => (
                             <Link key={sub.name} href={sub.href} className="block px-4 py-2 text-sm text-muted-foreground hover:text-foreground" onClick={() => setMobileOpen(false)}>
                               {sub.name}
                             </Link>

@@ -28,6 +28,7 @@ export default function TopBar() {
           <span className="hidden sm:inline">Mandatory Disclosure</span>
           <span className="sm:hidden">Disclosure</span>
         </a>
+        
 
         {/* ── Running Marquee ── */}
         <div className="flex-1 overflow-hidden flex items-center">

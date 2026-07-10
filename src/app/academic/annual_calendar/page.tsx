@@ -38,7 +38,7 @@ export default function CalendarPage() {
                 <span className="text-xs font-semibold text-muted-foreground">Annual Calendar 2025–26</span>
               </div>
               <a
-                href="/anual_celender.jpg"
+                href="/anual_celender.png"
                 download="Annual-Calendar-2025-26.jpg"
                 className="flex items-center gap-1.5 text-xs text-primary font-medium hover:underline"
               >
@@ -49,7 +49,7 @@ export default function CalendarPage() {
               </a>
             </div>
             <img
-              src="/anual_celender.jpg"
+              src="/anual_celender.png"
               alt="Annual Calendar 2025-26"
               className="w-full object-contain"
             />
