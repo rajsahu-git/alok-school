@@ -73,14 +73,14 @@ export default async function ArticleDetailPage({ params }: { params: Promise<{ 
 
   return (
     <>
-      <PageHero
+      {/* <PageHero
         title={article.title}
         breadcrumbs={[
           { label: 'Home', href: '/' },
           { label: 'Articles', href: '/online/artical-media' },
           { label: article.title },
         ]}
-      />
+      /> */}
       <div className="max-w-6xl mx-auto px-4 py-10 flex flex-col lg:flex-row gap-10">
         {/* Main content */}
         <article className="flex-1 min-w-0 overflow-hidden">
