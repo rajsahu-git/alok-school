@@ -115,8 +115,9 @@ const navItems = [
   { name: "Media", href: "/media", children:[
     {name:"Blog", href: "/blog" },
   { name: "Newspaper Coverage", href: "/online/artical-media/media" },
-   { name: "School News / Articles", href: "/online/artical-media/news" }, 
+   { name: "School News / Articles", href: "/online/artical-media/news" },
   ] },
+    
 ];
 
 function Navbar() {

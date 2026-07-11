@@ -16,7 +16,6 @@ interface Disclosure {
   _id: string;
   title?: string;
   file: DisclosureFile;
-  isActive: boolean;
   createdAt: string;
 }
 
@@ -39,7 +38,6 @@ export default function MandatoryDisclosureManager() {
   const [loading, setLoading]         = useState(true);
   const [saving, setSaving]           = useState(false);
   const [deletingId, setDeletingId]   = useState<string | null>(null);
-  const [togglingId, setTogglingId]   = useState<string | null>(null);
   const [editingId, setEditingId]     = useState<string | null>(null);
   const [showForm, setShowForm]       = useState(false);
   const [error, setError]             = useState<string | null>(null);
@@ -98,18 +96,6 @@ export default function MandatoryDisclosureManager() {
     } finally { setSaving(false); }
   };
 
-  // ── Toggle active ──
-  const handleToggle = async (d: Disclosure) => {
-    setTogglingId(d._id);
-    try {
-      const fd = new FormData();
-      fd.append("isActive", String(!d.isActive));
-      await apiClient.put(`/mandatory-disclosure/${d._id}`, fd);
-      await fetchDisclosures();
-    } catch { alert("Failed to update."); }
-    finally { setTogglingId(null); }
-  };
-
   // ── Delete ──
   const handleDelete = async (id: string) => {
     if (!confirm("Delete this mandatory disclosure?")) return;
@@ -121,7 +107,6 @@ export default function MandatoryDisclosureManager() {
     finally { setDeletingId(null); }
   };
 
-  const activeCount = disclosures.filter((d) => d.isActive).length;
   const inputCls = "px-3 py-2.5 rounded-lg border border-border bg-background text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary";
 
   // ─── Render ───────────────────────────────────────────────────────────────
@@ -133,7 +118,7 @@ export default function MandatoryDisclosureManager() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold text-foreground">Mandatory Disclosure Manager</h1>
-          <p className="text-sm text-muted-foreground mt-0.5">Upload and manage mandatory disclosure PDFs. Only one can be active on the website at a time.</p>
+          <p className="text-sm text-muted-foreground mt-0.5">Upload and manage mandatory disclosure PDFs. All uploaded documents are shown on the Mandatory Disclosure page.</p>
         </div>
         {!showForm && (
           <button onClick={() => { resetForm(); setShowForm(true); }}
@@ -144,19 +129,9 @@ export default function MandatoryDisclosureManager() {
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-        <div className="rounded-xl bg-primary/10 text-primary p-4 flex flex-col gap-1">
-          <span className="text-2xl font-black">{disclosures.length}</span>
-          <span className="text-xs font-semibold uppercase tracking-wide">Total</span>
-        </div>
-        <div className="rounded-xl bg-green-100 text-green-700 p-4 flex flex-col gap-1">
-          <span className="text-2xl font-black">{activeCount}</span>
-          <span className="text-xs font-semibold uppercase tracking-wide">Active</span>
-        </div>
-        <div className="rounded-xl bg-secondary text-muted-foreground p-4 flex flex-col gap-1">
-          <span className="text-2xl font-black">{disclosures.length - activeCount}</span>
-          <span className="text-xs font-semibold uppercase tracking-wide">Inactive</span>
-        </div>
+      <div className="rounded-xl bg-primary/10 text-primary p-4 flex flex-col gap-1 w-fit min-w-[140px]">
+        <span className="text-2xl font-black">{disclosures.length}</span>
+        <span className="text-xs font-semibold uppercase tracking-wide">Total Documents</span>
       </div>
 
       {/* ── Form ── */}
@@ -246,7 +221,7 @@ export default function MandatoryDisclosureManager() {
               <table className="w-full text-sm">
                 <thead>
                   <tr className="bg-secondary/50 text-left">
-                    {["Title", "Status", "File", "Added On", "Actions"].map((h) => (
+                    {["Title", "File", "Added On", "Actions"].map((h) => (
                       <th key={h} className="px-4 py-3 text-xs font-semibold text-muted-foreground uppercase tracking-wide whitespace-nowrap">{h}</th>
                     ))}
                   </tr>
@@ -255,15 +230,6 @@ export default function MandatoryDisclosureManager() {
                   {disclosures.map((d, i) => (
                     <tr key={d._id} className={`border-t border-border hover:bg-secondary/30 transition-colors ${i % 2 === 0 ? "" : "bg-secondary/10"}`}>
                       <td className="px-4 py-3 font-medium text-foreground whitespace-nowrap">{d.title || "Untitled"}</td>
-                      <td className="px-4 py-3">
-                        <button
-                          onClick={() => handleToggle(d)}
-                          disabled={togglingId === d._id}
-                          className={`relative w-11 h-6 rounded-full transition-colors duration-200 focus:outline-none ${d.isActive ? "bg-green-500" : "bg-border"} disabled:opacity-50`}
-                        >
-                          <span className={`absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow transition-transform duration-200 ${d.isActive ? "translate-x-5" : "translate-x-0"}`} />
-                        </button>
-                      </td>
                       <td className="px-4 py-3">
                         <a href={d.file.viewLink} target="_blank" rel="noopener noreferrer"
                           className="inline-flex items-center gap-1.5 text-xs text-primary font-medium hover:underline">
@@ -296,22 +262,13 @@ export default function MandatoryDisclosureManager() {
             <div className="md:hidden flex flex-col divide-y divide-border">
               {disclosures.map((d) => (
                 <div key={d._id} className="p-4 flex flex-col gap-3">
-                  <div className="flex items-center justify-between">
-                    <p className="text-sm font-semibold text-foreground">{d.title || "Untitled"}</p>
-                    <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${d.isActive ? "bg-green-500 text-white" : "bg-secondary text-muted-foreground border border-border"}`}>
-                      {d.isActive ? "● Active" : "○ Inactive"}
-                    </span>
-                  </div>
+                  <p className="text-sm font-semibold text-foreground">{d.title || "Untitled"}</p>
                   <p className="text-xs text-muted-foreground">Added {fmt(d.createdAt)}</p>
                   <div className="flex items-center gap-2">
                     <a href={d.file.viewLink} target="_blank" rel="noopener noreferrer"
                       className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-secondary text-foreground text-xs font-medium">
                       <ViewIcon /> View
                     </a>
-                    <button onClick={() => handleToggle(d)} disabled={togglingId === d._id}
-                      className="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-green-500/10 text-green-700 text-xs font-medium disabled:opacity-50">
-                      {d.isActive ? "Deactivate" : "Activate"}
-                    </button>
                     <button onClick={() => openEdit(d)}
                       className="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-primary/10 text-primary text-xs font-medium">
                       <EditIcon /> Edit

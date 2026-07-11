@@ -17,8 +17,7 @@ export default function TopBar() {
 
         {/* ── Mandatory Disclosure Button ── */}
         <a
-          href="/mandatory-disclosure.pdf"
-          target="_blank"
+          href="/mandatory-disclosure"
           rel="noopener noreferrer"
           className="flex-shrink-0 flex items-center gap-2 px-3 sm:px-4 bg-primary-foreground text-primary hover:bg-primary-foreground/90 transition-colors font-bold text-[11px] sm:text-xs whitespace-nowrap border-r-2 border-primary-foreground/30 tracking-wide uppercase cursor-pointer"
         >
@@ -28,7 +27,7 @@ export default function TopBar() {
           <span className="hidden sm:inline">Mandatory Disclosure</span>
           <span className="sm:hidden">Disclosure</span>
         </a>
-        
+
 
         {/* ── Running Marquee ── */}
         <div className="flex-1 overflow-hidden flex items-center">

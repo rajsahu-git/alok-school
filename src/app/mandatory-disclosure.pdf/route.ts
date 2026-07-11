@@ -1,11 +1,13 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 export const dynamic = "force-dynamic";
 
 const BACKEND = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5000";
 
-export async function GET() {
+export async function GET(req: NextRequest) {
   try {
+    const forceDownload = req.nextUrl.searchParams.get("dl") === "1";
+
     const activeRes = await fetch(`${BACKEND}/api/mandatory-disclosure/active`, { cache: "no-store" });
     if (!activeRes.ok) {
       return new NextResponse("Mandatory disclosure not found", { status: 404 });
@@ -26,10 +28,12 @@ export async function GET() {
     }
 
     const buffer = await pdfRes.arrayBuffer();
+    const filename = (disclosure?.title?.trim() || "mandatory-disclosure").replace(/[^\w\-]+/g, "-") + ".pdf";
+
     return new NextResponse(buffer, {
       headers: {
         "Content-Type": "application/pdf",
-        "Content-Disposition": 'inline; filename="mandatory-disclosure.pdf"',
+        "Content-Disposition": `${forceDownload ? "attachment" : "inline"}; filename="${filename}"`,
         "Cache-Control": "no-store, must-revalidate",
       },
     });
