@@ -7,7 +7,8 @@ export interface ExamNotice {
   examDateFrom: string;
   examDateTo: string;
   description: string;
-  pdf: { fileId: string; fileName: string; viewLink: string; directLink: string };
+  pdf?: { fileId: string; fileName: string; viewLink: string; directLink: string };
+  image?: { fileId: string; viewLink: string; directLink: string };
   createdAt: string;
 }
 

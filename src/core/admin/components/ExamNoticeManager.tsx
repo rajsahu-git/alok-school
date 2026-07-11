@@ -12,13 +12,20 @@ interface NoticePdf {
   directLink: string;
 }
 
+interface NoticeImage {
+  fileId: string;
+  viewLink: string;
+  directLink: string;
+}
+
 interface ExamNotice {
   _id: string;
   title: string;
   examDateFrom: string;
   examDateTo: string;
   description: string;
-  pdf: NoticePdf;
+  pdf?: NoticePdf;
+  image?: NoticeImage;
   createdAt: string;
 }
 
@@ -49,8 +56,11 @@ export default function ExamNoticeManager() {
   const [error, setError]           = useState<string | null>(null);
   const [success, setSuccess]       = useState<string | null>(null);
   const [form, setForm]             = useState(EMPTY);
+  const [attachType, setAttachType] = useState<"pdf" | "image">("pdf");
   const [pdfFile, setPdfFile]       = useState<File | null>(null);
+  const [imageFile, setImageFile]   = useState<File | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
+  const imageRef = useRef<HTMLInputElement>(null);
 
   // ── Fetch ──
   const fetchNotices = useCallback(async () => {
@@ -67,12 +77,15 @@ export default function ExamNoticeManager() {
   // ── Form helpers ──
   const resetForm = () => {
     setForm(EMPTY);
+    setAttachType("pdf");
     setPdfFile(null);
+    setImageFile(null);
     setEditingId(null);
     setShowForm(false);
     setError(null);
     setSuccess(null);
     if (fileRef.current) fileRef.current.value = "";
+    if (imageRef.current) imageRef.current.value = "";
   };
 
   const openAdd = () => { resetForm(); setShowForm(true); };
@@ -85,7 +98,9 @@ export default function ExamNoticeManager() {
       examDateTo: toInput(n.examDateTo),
       description: n.description,
     });
+    setAttachType(n.image ? "image" : "pdf");
     setPdfFile(null);
+    setImageFile(null);
     setShowForm(true);
     setError(null);
     setSuccess(null);
@@ -94,10 +109,10 @@ export default function ExamNoticeManager() {
 
   // ── Save ──
   const handleSave = async () => {
-    if (!form.title.trim() || !form.examDateFrom || !form.examDateTo || !form.description.trim()) {
+    if (!form.title.trim() || !form.examDateFrom || !form.examDateTo ) {
       setError("All fields are required."); return;
     }
-    if (!editingId && !pdfFile) { setError("PDF file is required."); return; }
+    if (!editingId && !pdfFile && !imageFile) { setError("A PDF or image attachment is required."); return; }
 
     setSaving(true); setError(null); setSuccess(null);
     try {
@@ -106,7 +121,8 @@ export default function ExamNoticeManager() {
       fd.append("examDateFrom", form.examDateFrom);
       fd.append("examDateTo", form.examDateTo);
       fd.append("description", form.description.trim());
-      if (pdfFile) fd.append("pdf", pdfFile);
+      if (attachType === "pdf" && pdfFile) fd.append("pdf", pdfFile);
+      if (attachType === "image" && imageFile) fd.append("image", imageFile);
 
       if (editingId) {
         await apiClient.put(`/exam-notice/${editingId}`, fd);
@@ -200,7 +216,7 @@ export default function ExamNoticeManager() {
 
           {/* Description */}
           <div className="flex flex-col gap-1.5">
-            <label className="text-xs font-medium text-muted-foreground">Description <span className="text-red-500">*</span></label>
+            <label className="text-xs font-medium text-muted-foreground">Description </label>
             <textarea
               rows={3}
               placeholder="Brief description about the examination..."
@@ -209,33 +225,89 @@ export default function ExamNoticeManager() {
             />
           </div>
 
-          {/* PDF Upload */}
+          {/* Attachment type toggle */}
           <div className="flex flex-col gap-1.5">
             <label className="text-xs font-medium text-muted-foreground">
-              PDF File {!editingId && <span className="text-red-500">*</span>}
+              Attachment {!editingId && <span className="text-red-500">*</span>}
               {editingId && <span className="text-muted-foreground"> (leave empty to keep existing)</span>}
             </label>
-            <div
-              onClick={() => fileRef.current?.click()}
-              className="flex items-center gap-3 px-4 py-3 rounded-lg border-2 border-dashed border-border hover:border-primary hover:bg-primary/5 cursor-pointer transition-all"
-            >
-              <PdfIcon />
-              <span className="text-sm text-muted-foreground">
-                {pdfFile ? pdfFile.name : "Click to upload PDF (max 10MB)"}
-              </span>
-              {pdfFile && (
+            <div className="flex gap-2">
+              {(["pdf", "image"] as const).map((t) => (
                 <button
+                  key={t}
                   type="button"
-                  onClick={(e) => { e.stopPropagation(); setPdfFile(null); if (fileRef.current) fileRef.current.value = ""; }}
-                  className="ml-auto text-xs text-red-500 hover:text-red-600"
+                  onClick={() => {
+                    setAttachType(t);
+                    setPdfFile(null);
+                    setImageFile(null);
+                    if (fileRef.current) fileRef.current.value = "";
+                    if (imageRef.current) imageRef.current.value = "";
+                  }}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-medium border transition-colors ${
+                    attachType === t
+                      ? "bg-primary text-primary-foreground border-primary"
+                      : "bg-background text-muted-foreground border-border hover:border-primary"
+                  }`}
                 >
-                  Remove
+                  {t === "pdf" ? "PDF" : "Image"}
                 </button>
-              )}
+              ))}
             </div>
-            <input ref={fileRef} type="file" accept="application/pdf" className="hidden"
-              onChange={(e) => { const f = e.target.files?.[0]; if (f) setPdfFile(f); }} />
           </div>
+
+          {/* PDF Upload */}
+          {attachType === "pdf" && (
+            <div className="flex flex-col gap-1.5">
+              <div
+                onClick={() => fileRef.current?.click()}
+                className="flex items-center gap-3 px-4 py-3 rounded-lg border-2 border-dashed border-border hover:border-primary hover:bg-primary/5 cursor-pointer transition-all"
+              >
+                <PdfIcon />
+                <span className="text-sm text-muted-foreground">
+                  {pdfFile ? pdfFile.name : "Click to upload PDF (max 10MB)"}
+                </span>
+                {pdfFile && (
+                  <button
+                    type="button"
+                    onClick={(e) => { e.stopPropagation(); setPdfFile(null); if (fileRef.current) fileRef.current.value = ""; }}
+                    className="ml-auto text-xs text-red-500 hover:text-red-600"
+                  >
+                    Remove
+                  </button>
+                )}
+              </div>
+              <input ref={fileRef} type="file" accept="application/pdf" className="hidden"
+                onChange={(e) => { const f = e.target.files?.[0]; if (f) setPdfFile(f); }} />
+            </div>
+          )}
+
+          {/* Image Upload */}
+          {attachType === "image" && (
+            <div className="flex flex-col gap-1.5">
+              <div
+                onClick={() => imageRef.current?.click()}
+                className="flex items-center gap-3 px-4 py-3 rounded-lg border-2 border-dashed border-border hover:border-primary hover:bg-primary/5 cursor-pointer transition-all"
+              >
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-4 h-4 text-muted-foreground">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                <span className="text-sm text-muted-foreground">
+                  {imageFile ? imageFile.name : "Click to upload image (JPG, PNG, WEBP — max 10MB)"}
+                </span>
+                {imageFile && (
+                  <button
+                    type="button"
+                    onClick={(e) => { e.stopPropagation(); setImageFile(null); if (imageRef.current) imageRef.current.value = ""; }}
+                    className="ml-auto text-xs text-red-500 hover:text-red-600"
+                  >
+                    Remove
+                  </button>
+                )}
+              </div>
+              <input ref={imageRef} type="file" accept="image/jpeg,image/png,image/webp,image/gif" className="hidden"
+                onChange={(e) => { const f = e.target.files?.[0]; if (f) setImageFile(f); }} />
+            </div>
+          )}
 
           {error   && <p className="text-sm text-red-500">{error}</p>}
           {success && <p className="text-sm text-green-600">{success}</p>}
@@ -284,11 +356,17 @@ export default function ExamNoticeManager() {
             {notices.map((n) => (
               <div key={n._id} className="rounded-xl border border-border bg-background p-4 flex flex-col sm:flex-row sm:items-center gap-4">
 
-                {/* PDF icon */}
-                <div className="w-12 h-12 rounded-lg bg-red-50 border border-red-100 flex items-center justify-center flex-shrink-0">
-                  <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6 text-red-500" stroke="currentColor" strokeWidth={1.5}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
-                  </svg>
+                {/* Attachment icon */}
+                <div className={`w-12 h-12 rounded-lg border flex items-center justify-center flex-shrink-0 ${n.image ? "bg-blue-50 border-blue-100" : "bg-red-50 border-red-100"}`}>
+                  {n.image ? (
+                    <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6 text-blue-500" stroke="currentColor" strokeWidth={1.5}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                  ) : (
+                    <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6 text-red-500" stroke="currentColor" strokeWidth={1.5}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                    </svg>
+                  )}
                 </div>
 
                 {/* Info */}
@@ -308,12 +386,12 @@ export default function ExamNoticeManager() {
                 {/* Actions */}
                 <div className="flex items-center gap-2 flex-shrink-0">
                   <a
-                    href={n.pdf.viewLink}
+                    href={n.pdf?.viewLink ?? (n.image ? `/api/drive-image?id=${n.image.fileId}` : "#")}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-secondary hover:bg-border text-foreground text-xs font-medium transition-colors"
                   >
-                    <ViewIcon /> View PDF
+                    <ViewIcon /> {n.image ? "View Image" : "View PDF"}
                   </a>
                   <button
                     onClick={() => openEdit(n)}

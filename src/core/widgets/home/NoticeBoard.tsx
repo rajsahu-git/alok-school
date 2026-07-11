@@ -8,12 +8,12 @@ interface Notice {
   isActive: boolean;
   link?: string;
   pdf?: { viewLink: string };
+  image?: { fileId: string; viewLink: string };
 }
 
 export default function NoticeBoard({ notices }: { notices: Notice[] }) {
   const listRef = useRef<HTMLUListElement>(null);
   const [paused, setPaused] = useState(false);
-  console.log("notice...",notices)
   useEffect(() => {
     const el = listRef.current;
     if (!el) return;
@@ -52,7 +52,10 @@ export default function NoticeBoard({ notices }: { notices: Notice[] }) {
           >
             <ul ref={listRef} className="absolute w-full will-change-transform">
               {[...active, ...active].map((notice, i) => {
-                const href = notice.pdf?.viewLink ?? notice.link ?? "#";
+                const href = notice.pdf?.viewLink
+                  ?? (notice.image ? `/api/drive-image?id=${notice.image.fileId}` : undefined)
+                  ?? notice.link
+                  ?? "#";
                 return (
                   <li key={`${notice._id}-${i}`} className="flex items-start gap-2 px-4 py-2 border-b border-gray-100 last:border-0">
                     <span className="text-accent font-bold mt-0.5 shrink-0">»</span>

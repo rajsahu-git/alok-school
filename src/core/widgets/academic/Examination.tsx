@@ -127,7 +127,7 @@ function NoticeCard({ notice: n, active }: { notice: ExamNotice; active: boolean
 
       {/* Right — Download */}
       <a
-        href={n.pdf.viewLink}
+        href={n.pdf?.viewLink ?? (n.image ? `/api/drive-image?id=${n.image.fileId}` : '#')}
         target="_blank"
         rel="noopener noreferrer"
         className={`flex-shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${
