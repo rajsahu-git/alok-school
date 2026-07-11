@@ -93,7 +93,7 @@ export default function AlumniManager() {
 
   // ── Save (create / update) ──
   const handleSave = async () => {
-    if (!form.name.trim() || !form.batch.trim() || !form.currentPosition.trim()) {
+    if (!form.name.trim()  || !form.currentPosition.trim()) {
       setError("Name, batch and current position are required."); return;
     }
     if (!editingId && !imageFile) { setError("Image is required."); return; }
@@ -180,7 +180,7 @@ export default function AlumniManager() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {[
               { key: "name",            label: "Full Name",        required: true,  placeholder: "e.g. Rahul Sharma" },
-              { key: "batch",           label: "Batch Year",       required: true,  placeholder: "e.g. 2015-16" },
+              { key: "batch",           label: "Batch Year",       required: false,  placeholder: "e.g. 2015-16" },
               { key: "currentPosition", label: "Current Position", required: true,  placeholder: "e.g. Software Engineer at Google" },
               { key: "linkedin",        label: "LinkedIn URL",     required: false, placeholder: "https://linkedin.com/in/..." },
               { key: "github",          label: "GitHub URL",       required: false, placeholder: "https://github.com/..." },
