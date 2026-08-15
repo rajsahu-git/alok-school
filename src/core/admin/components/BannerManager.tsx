@@ -168,7 +168,7 @@ export default function BannerManager() {
           <p className="text-sm text-muted-foreground">
             Click to select {mode === "single" ? "an image" : "images"}
           </p>
-          <p className="text-xs text-muted-foreground">JPG, PNG, WEBP — max 5MB each</p>
+          <p className="text-xs text-muted-foreground">JPG, PNG, WEBP — max 100MB each</p>
         </div>
 
         <input
