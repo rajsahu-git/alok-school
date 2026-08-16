@@ -3,9 +3,10 @@ import { cookies } from "next/headers";
 
 export const maxDuration = 60;
 export const dynamic = 'force-dynamic';
-// Node.js Serverless Functions on Vercel cap the request body at ~4.5MB (AWS Lambda
-// payload limit), which silently truncated/rejected image uploads above that size.
-// Edge Functions stream the body instead of buffering it, so they aren't bound by that limit.
+// Note: Vercel enforces a hard ~4.5MB request body limit on every Vercel Function in
+// front of this route, regardless of runtime (Node or Edge) — switching to Edge here
+// does NOT lift it. Large file uploads (see apiClient.ts) bypass this proxy entirely
+// and go straight to the backend for that reason.
 export const runtime = 'edge';
 
 const BACKEND = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5000";

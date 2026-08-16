@@ -1,6 +1,13 @@
 /**
- * apiClient — always calls through the Next.js proxy (/api/...)
+ * apiClient — calls through the Next.js proxy (/api/...) for JSON requests.
  * The proxy forwards the request to the backend and injects the auth token server-side.
+ *
+ * FormData (file upload) requests go straight to the backend instead. Vercel enforces
+ * a hard ~4.5MB request body limit on every function in front of the proxy — regardless
+ * of runtime (Node or Edge) — so routing image/file uploads through it fails once the
+ * file exceeds that size. The backend isn't hosted on Vercel and has no such cap, and it
+ * already accepts the same Bearer token this client sends, so uploads bypass the proxy
+ * and hit it directly.
  *
  * Usage:
  *   apiClient.get("/banners")
@@ -8,6 +15,8 @@
  *   apiClient.put("/banners/123", { order: 2 })
  *   apiClient.delete("/banners/123")
  */
+
+const BACKEND = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5000";
 
 type ApiResponse<T = unknown> = Promise<T>;
 
@@ -29,7 +38,9 @@ function buildHeaders(body?: unknown): Record<string, string> {
 
 async function request<T>(method: string, path: string, body?: unknown): ApiResponse<T> {
   const cleanPath = path.startsWith("/") ? path.slice(1) : path;
-  const res = await fetch(`/api/${cleanPath}`, {
+  const isFormData = body instanceof FormData;
+  const url = isFormData ? `${BACKEND}/api/${cleanPath}` : `/api/${cleanPath}`;
+  const res = await fetch(url, {
     method,
     headers: buildHeaders(body),
     body:
