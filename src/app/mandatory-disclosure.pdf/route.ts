@@ -14,15 +14,17 @@ export async function GET(req: NextRequest) {
     }
 
     const disclosure = await activeRes.json();
+    const filePath = disclosure?.file?.filePath;
     const fileId = disclosure?.file?.fileId;
-    if (!fileId) {
+    const fileUrl = filePath ? `${BACKEND}/uploads/mandatory-disclosure/${filePath}` : null;
+    if (!fileUrl && !fileId) {
       return new NextResponse("Mandatory disclosure not found", { status: 404 });
     }
 
-    const pdfRes = await fetch(`https://drive.google.com/uc?export=download&id=${fileId}`, {
-      headers: { "User-Agent": "Mozilla/5.0" },
-      redirect: "follow",
-    });
+    const pdfRes = await fetch(
+      fileUrl ?? `https://drive.google.com/uc?export=download&id=${fileId}`,
+      { headers: { "User-Agent": "Mozilla/5.0" }, redirect: "follow" }
+    );
     if (!pdfRes.ok) {
       return new NextResponse("Failed to fetch mandatory disclosure PDF", { status: 502 });
     }

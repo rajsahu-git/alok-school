@@ -6,10 +6,10 @@ import { apiClient } from "@/lib/apiClient";
 // ─── Types ────────────────────────────────────────────────────────────────────
 
 interface DisclosureFile {
-  fileId: string;
   fileName: string;
-  viewLink: string;
-  directLink: string;
+  filePath?: string;
+  // Legacy field from documents uploaded before the switch to local storage.
+  viewLink?: string;
 }
 
 interface Disclosure {
@@ -30,6 +30,8 @@ const ViewIcon  = () => <svg viewBox="0 0 24 24" fill="currentColor" className="
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
 const fmt = (d: string) => new Date(d).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" });
+// Served at a clean root URL (e.g. /Fee-Structure.pdf) — no backend host or /uploads path exposed.
+const fileHref = (d: Disclosure) => `/${encodeURIComponent(d.file.fileName)}`;
 
 // ─── Component ────────────────────────────────────────────────────────────────
 
@@ -231,7 +233,7 @@ export default function MandatoryDisclosureManager() {
                     <tr key={d._id} className={`border-t border-border hover:bg-secondary/30 transition-colors ${i % 2 === 0 ? "" : "bg-secondary/10"}`}>
                       <td className="px-4 py-3 font-medium text-foreground whitespace-nowrap">{d.title || "Untitled"}</td>
                       <td className="px-4 py-3">
-                        <a href={d.file.viewLink} target="_blank" rel="noopener noreferrer"
+                        <a href={fileHref(d)} target="_blank" rel="noopener noreferrer"
                           className="inline-flex items-center gap-1.5 text-xs text-primary font-medium hover:underline">
                           <ViewIcon /> View File
                         </a>
@@ -265,7 +267,7 @@ export default function MandatoryDisclosureManager() {
                   <p className="text-sm font-semibold text-foreground">{d.title || "Untitled"}</p>
                   <p className="text-xs text-muted-foreground">Added {fmt(d.createdAt)}</p>
                   <div className="flex items-center gap-2">
-                    <a href={d.file.viewLink} target="_blank" rel="noopener noreferrer"
+                    <a href={fileHref(d)} target="_blank" rel="noopener noreferrer"
                       className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-secondary text-foreground text-xs font-medium">
                       <ViewIcon /> View
                     </a>

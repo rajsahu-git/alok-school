@@ -3,7 +3,14 @@ import PageHero from '@/core/widgets/shared/PageHero';
 interface MandatoryDisclosure {
   _id: string;
   title?: string;
-  file: { fileId: string; fileName: string; viewLink: string; directLink: string };
+  file: {
+    fileName: string;
+    filePath?: string;
+    // Legacy fields from documents uploaded before the switch to local storage.
+    fileId?: string;
+    viewLink?: string;
+    directLink?: string;
+  };
   createdAt: string;
 }
 
@@ -42,7 +49,12 @@ export default async function MandatoryDisclosurePage() {
               <p className="text-sm">Mandatory disclosure documents are not available at the moment.</p>
             </div>
           ) : (
-            disclosures.map((d) => (
+            disclosures.map((d) => {
+              // Served at a clean root URL (e.g. /Fee-Structure.pdf) — no backend host or /uploads path exposed.
+              const fileHref = `/${encodeURIComponent(d.file.fileName)}`;
+              const viewHref = fileHref;
+              const downloadHref = `${fileHref}?dl=1`;
+              return (
               <div key={d._id}
                 className="rounded-xl border border-border bg-card p-5 flex flex-col sm:flex-row sm:items-center gap-5 shadow-sm hover:shadow-md transition-shadow duration-300 hover:border-primary/30">
 
@@ -64,7 +76,7 @@ export default async function MandatoryDisclosurePage() {
                 {/* Actions */}
                 <div className="flex-shrink-0 flex items-center gap-2">
                   <a
-                    href={`/api/drive-pdf?id=${d.file.fileId}`}
+                    href={viewHref}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 px-4 py-2.5 rounded-lg border border-border text-foreground text-sm font-medium hover:bg-secondary transition-colors"
@@ -76,7 +88,7 @@ export default async function MandatoryDisclosurePage() {
                     View
                   </a>
                   <a
-                    href={`/api/drive-pdf?id=${d.file.fileId}&dl=1`}
+                    href={downloadHref}
                     className="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-primary text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity"
                   >
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
@@ -87,7 +99,8 @@ export default async function MandatoryDisclosurePage() {
                   </a>
                 </div>
               </div>
-            ))
+              );
+            })
           )}
         </div>
       </section>
