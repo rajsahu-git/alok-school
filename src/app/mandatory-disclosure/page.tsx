@@ -1,4 +1,5 @@
 import PageHero from '@/core/widgets/shared/PageHero';
+import { disclosureSlug } from '@/lib/disclosureSlug';
 
 interface MandatoryDisclosure {
   _id: string;
@@ -50,8 +51,8 @@ export default async function MandatoryDisclosurePage() {
             </div>
           ) : (
             disclosures.map((d) => {
-              // Served at a clean root URL (e.g. /Fee-Structure.pdf) — no backend host or /uploads path exposed.
-              const fileHref = `/${encodeURIComponent(d.file.fileName)}`;
+              // Served at a clean, title-based root URL (e.g. /fee-structure.pdf) — no backend host or /uploads path exposed.
+              const fileHref = `/${disclosureSlug(d)}`;
               const viewHref = fileHref;
               const downloadHref = `${fileHref}?dl=1`;
               return (

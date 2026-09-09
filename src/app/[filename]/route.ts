@@ -1,11 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import { notFound } from "next/navigation";
+import { disclosureSlug } from "@/lib/disclosureSlug";
 
 export const dynamic = "force-dynamic";
 
 const BACKEND = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5000";
 
 interface Disclosure {
+  title?: string;
   file: {
     fileName: string;
     filePath?: string;
@@ -13,8 +15,8 @@ interface Disclosure {
   };
 }
 
-// Serves mandatory-disclosure PDFs at a clean root URL, e.g. /Fee-Structure-2026-27.pdf,
-// instead of exposing the backend host or an id-based query string.
+// Serves mandatory-disclosure PDFs at a clean root URL, e.g. /fee-structure-2026-27.pdf,
+// instead of exposing the backend host, the /uploads path, or the uploaded file's raw name.
 export async function GET(req: NextRequest, { params }: { params: Promise<{ filename: string }> }) {
   const { filename } = await params;
   if (!filename.toLowerCase().endsWith(".pdf")) notFound();
@@ -25,7 +27,7 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ file
   if (!listRes.ok) notFound();
 
   const { disclosures = [] } = (await listRes.json()) as { disclosures: Disclosure[] };
-  const disclosure = disclosures.find((d) => d.file?.fileName === filename);
+  const disclosure = disclosures.find((d) => disclosureSlug(d) === filename);
   if (!disclosure) notFound();
 
   const { filePath, fileId } = disclosure.file;

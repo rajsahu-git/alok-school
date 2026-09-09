@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect, useCallback } from "react";
 import { apiClient } from "@/lib/apiClient";
+import { disclosureSlug } from "@/lib/disclosureSlug";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -30,8 +31,8 @@ const ViewIcon  = () => <svg viewBox="0 0 24 24" fill="currentColor" className="
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
 const fmt = (d: string) => new Date(d).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" });
-// Served at a clean root URL (e.g. /Fee-Structure.pdf) — no backend host or /uploads path exposed.
-const fileHref = (d: Disclosure) => `/${encodeURIComponent(d.file.fileName)}`;
+// Served at a clean, title-based root URL (e.g. /fee-structure.pdf) — no backend host or /uploads path exposed.
+const fileHref = (d: Disclosure) => `/${disclosureSlug(d)}`;
 
 // ─── Component ────────────────────────────────────────────────────────────────
 
