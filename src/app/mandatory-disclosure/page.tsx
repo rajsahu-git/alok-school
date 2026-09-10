@@ -71,7 +71,7 @@ export default async function MandatoryDisclosurePage() {
                 {/* Info */}
                 <div className="flex flex-col gap-1.5 flex-1 min-w-0">
                   <h3 className="text-sm font-bold text-foreground">{d.title || 'Mandatory Disclosure'}</h3>
-                  <span className="text-xs text-muted-foreground">Added {fmt(d.createdAt)}</span>
+                  {/* <span className="text-xs text-muted-foreground">Added {fmt(d.createdAt)}</span> */}
                 </div>
 
                 {/* Actions */}
