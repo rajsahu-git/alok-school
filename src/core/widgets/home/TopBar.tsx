@@ -17,7 +17,7 @@ export default function TopBar() {
 
         {/* ── Mandatory Disclosure Button ── */}
         <a
-          href="/mandatory-disclosure"
+          href="/mandatory-disclosure.pdf"
           rel="noopener noreferrer"
           className="flex-shrink-0 flex items-center gap-2 px-3 sm:px-4 bg-primary-foreground text-primary hover:bg-primary-foreground/90 transition-colors font-bold text-[11px] sm:text-xs whitespace-nowrap border-r-2 border-primary-foreground/30 tracking-wide uppercase cursor-pointer"
         >
